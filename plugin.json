@@ -1,0 +1,2019 @@
+{
+  "id": "higgsfield",
+  "kind": "plugin",
+  "version": "1.0.0",
+  "label": "Higgsfield",
+  "description": "Higgsfield AI API — 83 image and video models (Soul, Seedance, Kling, Wan, Hailuo, PixVerse, LTX, Genjutsu, Recraft, Ideogram…): text/image/reference to video, picture generation and editing, video edit/extend, motion transfer, restyle, object swap and Soul ID characters. Agent tools plus workflow nodes.",
+  "min_app_version": "1.0.0",
+  "default_enabled": false,
+  "secret_keys": [
+    "higgsfield_api_key"
+  ],
+  "contributes": {
+    "settings.tabs": [
+      {
+        "id": "Higgsfield",
+        "label": "Higgsfield",
+        "icon": "assets/icon.png",
+        "ui": "sections"
+      }
+    ],
+    "settings.sections": [
+      {
+        "tab": "Higgsfield",
+        "id": "account",
+        "title": "Higgsfield",
+        "description": "Paste your Higgsfield API key as KEY_ID:KEY_SECRET (console.higgsfield.ai → API keys). Stored encrypted on this device. Powers the higgsfield_* tools and the Higgsfield workflow nodes. Generations use your API credit balance (pay as you go; failed and moderated requests are refunded).",
+        "order": 10,
+        "properties": [
+          {
+            "id": "higgsfield_api_key",
+            "type": "secret",
+            "label": "API key",
+            "placeholder": "KEY_ID:KEY_SECRET",
+            "testable": true,
+            "description": "From https://console.higgsfield.ai — Test checks the key and shows what a Soul 2 picture costs."
+          }
+        ]
+      },
+      {
+        "tab": "Higgsfield",
+        "id": "defaults",
+        "title": "Defaults",
+        "description": "The models tools and nodes use when they don't pick their own.",
+        "order": 20,
+        "properties": [
+          {
+            "id": "default_image_model",
+            "type": "select",
+            "label": "Picture model",
+            "default": "higgsfield-ai/soul/v2/standard",
+            "options": [
+              {
+                "value": "higgsfield-ai/soul/v2/standard",
+                "label": "SOUL V2 — Text to image (default)"
+              },
+              {
+                "value": "higgsfield/ads-studio/v1.0",
+                "label": "Ads Studio — Generate ads"
+              },
+              {
+                "value": "xai/grok-imagine-image-2.0",
+                "label": "Grok Image 2.0 — Generate and edit"
+              },
+              {
+                "value": "ideogram/v4.0",
+                "label": "Ideogram 4.0 — Generate"
+              },
+              {
+                "value": "marketing-studio/image",
+                "label": "Marketing Studio Image — 2.0 Alpha"
+              },
+              {
+                "value": "marketing-studio/image/flare",
+                "label": "Marketing Studio Image — 2.5 Flare"
+              },
+              {
+                "value": "marketing-studio/image/sunburst",
+                "label": "Marketing Studio Image — 2.5 Sunburst"
+              },
+              {
+                "value": "alibaba/qwen-image-3/text-to-image",
+                "label": "Qwen Image 3 — Text to image"
+              },
+              {
+                "value": "recraft/v4.1/pro/text-to-image",
+                "label": "Recraft V4.1 Pro — Text to image"
+              },
+              {
+                "value": "recraft/v4.1/utility/pro/text-to-image",
+                "label": "Recraft V4.1 Utility Pro — Text to image"
+              },
+              {
+                "value": "recraft/v4.1/utility/text-to-image",
+                "label": "Recraft V4.1 Utility — Text to image"
+              },
+              {
+                "value": "recraft/v4.1/text-to-image",
+                "label": "Recraft V4.1 — Text to image"
+              },
+              {
+                "value": "higgsfield-ai/soul/cinema",
+                "label": "SOUL Cinema — Text to image"
+              },
+              {
+                "value": "higgsfield-ai/soul/standard",
+                "label": "SOUL — Text to image"
+              },
+              {
+                "value": "z-image/turbo",
+                "label": "Z-Image Turbo — Generate"
+              }
+            ]
+          },
+          {
+            "id": "default_video_model",
+            "type": "select",
+            "label": "Text to video model",
+            "default": "bytedance/seedance-2.5/text-to-video",
+            "options": [
+              {
+                "value": "bytedance/seedance-2.5/text-to-video",
+                "label": "Seedance 2.5 — Text to video (default)"
+              },
+              {
+                "value": "minimax/hailuo-2.3/standard/text-to-video",
+                "label": "Hailuo 2.3 — Standard text to video"
+              },
+              {
+                "value": "alibaba/happy-horse/text-to-video",
+                "label": "Happy Horse 1.0 — Text to video"
+              },
+              {
+                "value": "alibaba/happy-horse/v1.1/text-to-video",
+                "label": "HappyHorse 1.1 — Text to video"
+              },
+              {
+                "value": "kling-video/v2.5-turbo/pro/text-to-video",
+                "label": "Kling 2.5 Turbo — Pro text to video"
+              },
+              {
+                "value": "kling-video/v2.6/pro/text-to-video",
+                "label": "Kling 2.6 — Pro text to video"
+              },
+              {
+                "value": "kling-video/v3.0/4k/text-to-video",
+                "label": "Kling 3.0 — 4K · Text to video"
+              },
+              {
+                "value": "kling-video/v3.0/pro/text-to-video",
+                "label": "Kling 3.0 — Pro · Text to video"
+              },
+              {
+                "value": "kling-video/v3.0/std/text-to-video",
+                "label": "Kling 3.0 — Standard · Text to video"
+              },
+              {
+                "value": "kling-video/v3.0-turbo/text-to-video",
+                "label": "Kling 3.0 — Turbo · Text to video"
+              },
+              {
+                "value": "lightricks/ltx-2.5/text-to-video/fast",
+                "label": "LTX-2.5 — Text to video fast"
+              },
+              {
+                "value": "lightricks/ltx-2.5/text-to-video/pro",
+                "label": "LTX-2.5 — Text to video pro"
+              },
+              {
+                "value": "minimax/h3/text-to-video",
+                "label": "MiniMax H3 — Text to video"
+              },
+              {
+                "value": "pixverse/v6/text-to-video",
+                "label": "PixVerse V6 — Text to video"
+              },
+              {
+                "value": "bytedance/seedance-2.0/text-to-video",
+                "label": "Seedance 2.0 — Text to video"
+              },
+              {
+                "value": "wan/v2.6/text-to-video",
+                "label": "Wan 2.6 — Text to video"
+              },
+              {
+                "value": "wan/v2.7/text-to-video",
+                "label": "Wan 2.7 — Text to video"
+              },
+              {
+                "value": "alibaba/wan-3.0-prime/text-to-video",
+                "label": "Wan 3.0 Prime — Text to video"
+              },
+              {
+                "value": "alibaba/wan-3.0/text-to-video",
+                "label": "Wan 3.0 — Text to video"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "walkthrough": {
+      "id": "higgsfield",
+      "title": "Higgsfield setup",
+      "auto_start": "first_enable",
+      "settings_tab": "Higgsfield",
+      "steps": [
+        {
+          "target": "settings.tab.higgsfield",
+          "title": "Paste your API key",
+          "body": "Create a key at console.higgsfield.ai → API keys, paste it here as KEY_ID:KEY_SECRET, then hit Test. Tools appear as higgsfield_* once this plugin is on.",
+          "advance": "next",
+          "mode": "rect"
+        },
+        {
+          "target": "settings.tab.higgsfield",
+          "title": "Pictures and videos",
+          "body": "Ask a ducky for a video or picture, or open Workflows: the Higgsfield group has Text/Image/Reference to Video, Text to Image, Edit Image, Edit Video, Motion Transfer, Restyle, Object Swap and Any Model. Paid steps only run with Spend credits on, and agents ask you first with the price.",
+          "advance": "next"
+        }
+      ]
+    },
+    "agent.tools": {
+      "category": "higgsfield",
+      "intent_pattern": "\\b(higgsfield|seedance|kling|soul\\s*(?:id|2|cinema)?|genjutsu|wan\\s*\\d|hailuo|minimax|pixverse|ltx|happy\\s*horse|recraft|ideogram|qwen\\s*image|z-?image|grok\\s*imagine|cinema\\s*studio|marketing\\s*studio|ads\\s*studio|text[- ]?to[- ]?video|image[- ]?to[- ]?video|motion\\s*(?:transfer|control)|restyle|object\\s*swap|ai\\s*video)\\b",
+      "plan_tools": [
+        "higgsfield_models",
+        "higgsfield_model_info",
+        "higgsfield_estimate",
+        "higgsfield_status",
+        "higgsfield_presets",
+        "higgsfield_soul_styles",
+        "higgsfield_character_status"
+      ]
+    },
+    "automations": {
+      "nodes": [
+        {
+          "id": "higgsfield.text_to_image",
+          "label": "Higgsfield Text to Image",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "A picture from your prompt (Soul 2 by default; Soul Cinema, Z-Image, Recraft, Ideogram, Qwen, Grok, Marketing Studio…). Reference pictures go in Refs on models that take them.",
+          "inputs": [
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text",
+              "required": true
+            },
+            {
+              "id": "refs",
+              "label": "References",
+              "type": "images"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "id": "images",
+              "label": "All images",
+              "type": "images"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "select",
+              "options": [
+                {
+                  "id": "higgsfield-ai/soul/v2/standard",
+                  "label": "SOUL V2 — Text to image (default)"
+                },
+                {
+                  "id": "higgsfield/ads-studio/v1.0",
+                  "label": "Ads Studio — Generate ads"
+                },
+                {
+                  "id": "xai/grok-imagine-image-2.0",
+                  "label": "Grok Image 2.0 — Generate and edit"
+                },
+                {
+                  "id": "ideogram/v4.0",
+                  "label": "Ideogram 4.0 — Generate"
+                },
+                {
+                  "id": "marketing-studio/image",
+                  "label": "Marketing Studio Image — 2.0 Alpha"
+                },
+                {
+                  "id": "marketing-studio/image/flare",
+                  "label": "Marketing Studio Image — 2.5 Flare"
+                },
+                {
+                  "id": "marketing-studio/image/sunburst",
+                  "label": "Marketing Studio Image — 2.5 Sunburst"
+                },
+                {
+                  "id": "alibaba/qwen-image-3/text-to-image",
+                  "label": "Qwen Image 3 — Text to image"
+                },
+                {
+                  "id": "recraft/v4.1/pro/text-to-image",
+                  "label": "Recraft V4.1 Pro — Text to image"
+                },
+                {
+                  "id": "recraft/v4.1/utility/pro/text-to-image",
+                  "label": "Recraft V4.1 Utility Pro — Text to image"
+                },
+                {
+                  "id": "recraft/v4.1/utility/text-to-image",
+                  "label": "Recraft V4.1 Utility — Text to image"
+                },
+                {
+                  "id": "recraft/v4.1/text-to-image",
+                  "label": "Recraft V4.1 — Text to image"
+                },
+                {
+                  "id": "higgsfield-ai/soul/cinema",
+                  "label": "SOUL Cinema — Text to image"
+                },
+                {
+                  "id": "higgsfield-ai/soul/standard",
+                  "label": "SOUL — Text to image"
+                },
+                {
+                  "id": "z-image/turbo",
+                  "label": "Z-Image Turbo — Generate"
+                }
+              ]
+            },
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.edit_image",
+          "label": "Higgsfield Edit Image",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Changes a picture the way your prompt says (Qwen Image 3 Edit by default; any picture model that takes an image).",
+          "inputs": [
+            {
+              "id": "image",
+              "label": "Image",
+              "type": "image",
+              "required": true
+            },
+            {
+              "id": "prompt",
+              "label": "Change",
+              "type": "text"
+            },
+            {
+              "id": "refs",
+              "label": "References",
+              "type": "images"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "id": "images",
+              "label": "All images",
+              "type": "images"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "select",
+              "options": [
+                {
+                  "id": "alibaba/qwen-image-3/edit",
+                  "label": "Qwen Image 3 — Edit images (default)"
+                },
+                {
+                  "id": "higgsfield/ads-studio/v1.0",
+                  "label": "Ads Studio — Generate ads"
+                },
+                {
+                  "id": "xai/grok-imagine-image-2.0",
+                  "label": "Grok Image 2.0 — Generate and edit"
+                },
+                {
+                  "id": "ideogram/v4.0",
+                  "label": "Ideogram 4.0 — Generate"
+                },
+                {
+                  "id": "marketing-studio/image",
+                  "label": "Marketing Studio Image — 2.0 Alpha"
+                },
+                {
+                  "id": "marketing-studio/image/flare",
+                  "label": "Marketing Studio Image — 2.5 Flare"
+                },
+                {
+                  "id": "marketing-studio/image/sunburst",
+                  "label": "Marketing Studio Image — 2.5 Sunburst"
+                },
+                {
+                  "id": "higgsfield-ai/soul/standard",
+                  "label": "SOUL — Text to image"
+                }
+              ]
+            },
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.text_to_video",
+          "label": "Higgsfield Text to Video",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "A video from your prompt (Seedance 2.5 by default; Kling 3, Wan 3, Hailuo, MiniMax H3, PixVerse 6, LTX 2.5, Happy Horse…). Takes minutes.",
+          "inputs": [
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text",
+              "required": true
+            },
+            {
+              "id": "negative",
+              "label": "Avoid",
+              "type": "text"
+            },
+            {
+              "id": "duration",
+              "label": "Seconds",
+              "type": "number"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "select",
+              "options": [
+                {
+                  "id": "bytedance/seedance-2.5/text-to-video",
+                  "label": "Seedance 2.5 — Text to video (default)"
+                },
+                {
+                  "id": "minimax/hailuo-2.3/standard/text-to-video",
+                  "label": "Hailuo 2.3 — Standard text to video"
+                },
+                {
+                  "id": "alibaba/happy-horse/text-to-video",
+                  "label": "Happy Horse 1.0 — Text to video"
+                },
+                {
+                  "id": "alibaba/happy-horse/v1.1/text-to-video",
+                  "label": "HappyHorse 1.1 — Text to video"
+                },
+                {
+                  "id": "kling-video/v2.5-turbo/pro/text-to-video",
+                  "label": "Kling 2.5 Turbo — Pro text to video"
+                },
+                {
+                  "id": "kling-video/v2.6/pro/text-to-video",
+                  "label": "Kling 2.6 — Pro text to video"
+                },
+                {
+                  "id": "kling-video/v3.0/4k/text-to-video",
+                  "label": "Kling 3.0 — 4K · Text to video"
+                },
+                {
+                  "id": "kling-video/v3.0/pro/text-to-video",
+                  "label": "Kling 3.0 — Pro · Text to video"
+                },
+                {
+                  "id": "kling-video/v3.0/std/text-to-video",
+                  "label": "Kling 3.0 — Standard · Text to video"
+                },
+                {
+                  "id": "kling-video/v3.0-turbo/text-to-video",
+                  "label": "Kling 3.0 — Turbo · Text to video"
+                },
+                {
+                  "id": "lightricks/ltx-2.5/text-to-video/fast",
+                  "label": "LTX-2.5 — Text to video fast"
+                },
+                {
+                  "id": "lightricks/ltx-2.5/text-to-video/pro",
+                  "label": "LTX-2.5 — Text to video pro"
+                },
+                {
+                  "id": "minimax/h3/text-to-video",
+                  "label": "MiniMax H3 — Text to video"
+                },
+                {
+                  "id": "pixverse/v6/text-to-video",
+                  "label": "PixVerse V6 — Text to video"
+                },
+                {
+                  "id": "bytedance/seedance-2.0/text-to-video",
+                  "label": "Seedance 2.0 — Text to video"
+                },
+                {
+                  "id": "wan/v2.6/text-to-video",
+                  "label": "Wan 2.6 — Text to video"
+                },
+                {
+                  "id": "wan/v2.7/text-to-video",
+                  "label": "Wan 2.7 — Text to video"
+                },
+                {
+                  "id": "alibaba/wan-3.0-prime/text-to-video",
+                  "label": "Wan 3.0 Prime — Text to video"
+                },
+                {
+                  "id": "alibaba/wan-3.0/text-to-video",
+                  "label": "Wan 3.0 — Text to video"
+                }
+              ]
+            },
+            {
+              "id": "duration",
+              "label": "Seconds (nearest the model offers)",
+              "type": "number"
+            },
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.image_to_video",
+          "label": "Higgsfield Image to Video",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Animates a picture (screenshots, concept art, thumbnails) into a video; first/last-frame models take an End frame.",
+          "inputs": [
+            {
+              "id": "image",
+              "label": "Image",
+              "type": "image",
+              "required": true
+            },
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text"
+            },
+            {
+              "id": "end_image",
+              "label": "End frame",
+              "type": "image"
+            },
+            {
+              "id": "duration",
+              "label": "Seconds",
+              "type": "number"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "select",
+              "options": [
+                {
+                  "id": "bytedance/seedance-2.5/image-to-video",
+                  "label": "Seedance 2.5 — Image to video (default)"
+                },
+                {
+                  "id": "minimax/hailuo-2.3/standard/image-to-video",
+                  "label": "Hailuo 2.3 — Standard image to video"
+                },
+                {
+                  "id": "alibaba/happy-horse/image-to-video",
+                  "label": "Happy Horse 1.0 — Image to video"
+                },
+                {
+                  "id": "alibaba/happy-horse/v1.1/image-to-video",
+                  "label": "HappyHorse 1.1 — Image to video"
+                },
+                {
+                  "id": "kling-video/v2.5-turbo/pro/image-to-video",
+                  "label": "Kling 2.5 Turbo — Pro image to video"
+                },
+                {
+                  "id": "kling-video/v2.5-turbo/standard/image-to-video",
+                  "label": "Kling 2.5 Turbo — Standard image to video"
+                },
+                {
+                  "id": "kling-video/v2.6/pro/image-to-video",
+                  "label": "Kling 2.6 — Pro image to video"
+                },
+                {
+                  "id": "kling-video/v3.0/4k/image-to-video",
+                  "label": "Kling 3.0 — 4K · Image to video"
+                },
+                {
+                  "id": "kling-video/v3.0/pro/image-to-video",
+                  "label": "Kling 3.0 — Pro · Image to video"
+                },
+                {
+                  "id": "kling-video/v3.0/std/image-to-video",
+                  "label": "Kling 3.0 — Standard · Image to video"
+                },
+                {
+                  "id": "kling-video/v3.0-turbo/image-to-video",
+                  "label": "Kling 3.0 — Turbo · Image to video"
+                },
+                {
+                  "id": "kling-video/o3/first-last-frame",
+                  "label": "Kling O3 — First last frame"
+                },
+                {
+                  "id": "kling-video/omni/first-last-frame",
+                  "label": "Kling Omni — First last frame"
+                },
+                {
+                  "id": "lightricks/ltx-2.5/image-to-video/fast",
+                  "label": "LTX-2.5 — Image to video fast"
+                },
+                {
+                  "id": "lightricks/ltx-2.5/image-to-video/pro",
+                  "label": "LTX-2.5 — Image to video pro"
+                },
+                {
+                  "id": "minimax/h3/image-to-video",
+                  "label": "MiniMax H3 — Image to video"
+                },
+                {
+                  "id": "pixverse/v6/image-to-video",
+                  "label": "PixVerse V6 — Image to video"
+                },
+                {
+                  "id": "bytedance/seedance-2.0/image-to-video",
+                  "label": "Seedance 2.0 — Image to video"
+                },
+                {
+                  "id": "wan/v2.6/image-to-video",
+                  "label": "Wan 2.6 — Image to video"
+                },
+                {
+                  "id": "wan/v2.7/image-to-video",
+                  "label": "Wan 2.7 — Image to video"
+                },
+                {
+                  "id": "alibaba/wan-3.0-prime/image-to-video",
+                  "label": "Wan 3.0 Prime — Image to video"
+                },
+                {
+                  "id": "alibaba/wan-3.0/image-to-video",
+                  "label": "Wan 3.0 — Image to video"
+                }
+              ]
+            },
+            {
+              "id": "duration",
+              "label": "Seconds (nearest the model offers)",
+              "type": "number"
+            },
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.reference_to_video",
+          "label": "Higgsfield Reference to Video",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "A video that keeps the characters, products or style of reference pictures, videos and sound (Seedance 2.5, Kling O3/Omni, Wan, MiniMax H3, Cinema Studio 4…).",
+          "inputs": [
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text",
+              "required": true
+            },
+            {
+              "id": "images",
+              "label": "Pictures",
+              "type": "images"
+            },
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "audio",
+              "label": "Sound",
+              "type": "audio"
+            },
+            {
+              "id": "duration",
+              "label": "Seconds",
+              "type": "number"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "select",
+              "options": [
+                {
+                  "id": "bytedance/seedance-2.5/reference-to-video",
+                  "label": "Seedance 2.5 — Reference to video (default)"
+                },
+                {
+                  "id": "higgsfield/cinema-studio/4.0",
+                  "label": "Cinema Studio 4.0 — Generate"
+                },
+                {
+                  "id": "xai/grok-imagine-video/v1.5/reference-to-video",
+                  "label": "Grok Imagine Video 1.5 — Reference to video"
+                },
+                {
+                  "id": "alibaba/happy-horse/reference-to-video",
+                  "label": "Happy Horse 1.0 — Reference to video"
+                },
+                {
+                  "id": "alibaba/happy-horse/v1.1/reference-to-video",
+                  "label": "HappyHorse 1.1 — Reference to video"
+                },
+                {
+                  "id": "kling-video/o3/image-reference",
+                  "label": "Kling O3 — Image reference"
+                },
+                {
+                  "id": "kling-video/o3/video-reference",
+                  "label": "Kling O3 — Video reference"
+                },
+                {
+                  "id": "kling-video/omni/image-reference",
+                  "label": "Kling Omni — Image reference"
+                },
+                {
+                  "id": "kling-video/omni/video-reference",
+                  "label": "Kling Omni — Video reference"
+                },
+                {
+                  "id": "minimax/h3/reference-to-video",
+                  "label": "MiniMax H3 — Reference to video"
+                },
+                {
+                  "id": "bytedance/seedance-2.0/reference-to-video",
+                  "label": "Seedance 2.0 — Reference to video"
+                },
+                {
+                  "id": "wan/v2.6/reference-to-video",
+                  "label": "Wan 2.6 — Reference to video"
+                },
+                {
+                  "id": "wan/v2.7/reference-to-video",
+                  "label": "Wan 2.7 — Reference to video"
+                },
+                {
+                  "id": "alibaba/wan-3.0-prime/reference-to-video",
+                  "label": "Wan 3.0 Prime — Reference to video"
+                },
+                {
+                  "id": "alibaba/wan-3.0/reference-to-video",
+                  "label": "Wan 3.0 — Reference to video"
+                }
+              ]
+            },
+            {
+              "id": "duration",
+              "label": "Seconds (nearest the model offers)",
+              "type": "number"
+            },
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.edit_video",
+          "label": "Higgsfield Edit Video",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Changes a video by prompt, or continues it (pick Seedance 2.5 Video extend).",
+          "inputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video",
+              "required": true
+            },
+            {
+              "id": "prompt",
+              "label": "Change",
+              "type": "text",
+              "required": true
+            },
+            {
+              "id": "refs",
+              "label": "References",
+              "type": "images"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "select",
+              "options": [
+                {
+                  "id": "bytedance/seedance-2.5/video-edit",
+                  "label": "Seedance 2.5 — Video edit (default)"
+                },
+                {
+                  "id": "kling-video/o3/video-edit",
+                  "label": "Kling O3 — Video edit"
+                },
+                {
+                  "id": "kling-video/omni/video-edit",
+                  "label": "Kling Omni — Video edit"
+                },
+                {
+                  "id": "bytedance/seedance-2.5/video-extend",
+                  "label": "Seedance 2.5 — Video extend"
+                }
+              ]
+            },
+            {
+              "id": "duration",
+              "label": "Seconds (nearest the model offers)",
+              "type": "number"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.motion_transfer",
+          "label": "Higgsfield Motion Transfer",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Puts the character in a picture into a video's motion (Genjutsu Motion Transfer, Kling Motion Control).",
+          "inputs": [
+            {
+              "id": "video",
+              "label": "Motion video",
+              "type": "video",
+              "required": true
+            },
+            {
+              "id": "image",
+              "label": "Character",
+              "type": "image",
+              "required": true
+            },
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "select",
+              "options": [
+                {
+                  "id": "higgsfield/genjutsu/motion-transfer/v1.0",
+                  "label": "Genjutsu — Motion transfer (default)"
+                },
+                {
+                  "id": "kling-video/motion-control/pro",
+                  "label": "Kling 2.6 Motion Control — Pro"
+                },
+                {
+                  "id": "kling-video/motion-control/std",
+                  "label": "Kling 2.6 Motion Control — Standard"
+                },
+                {
+                  "id": "kling-video/v3/motion-control/pro",
+                  "label": "Kling 3.0 Motion Control — Pro"
+                },
+                {
+                  "id": "kling-video/v3/motion-control/std",
+                  "label": "Kling 3.0 Motion Control — Standard"
+                }
+              ]
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.restyle_video",
+          "label": "Higgsfield Restyle Video",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Remakes a video (4 s or longer; the first 30 s) in a Genjutsu style preset, keeping its motion and sound.",
+          "inputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video",
+              "required": true
+            },
+            {
+              "id": "refs",
+              "label": "Characters",
+              "type": "images"
+            },
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "preset_id",
+              "label": "Style preset id (higgsfield_presets lists them)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.object_swap",
+          "label": "Higgsfield Object Swap",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Swaps an object in a video for the one in the pictures (Genjutsu Object Swap).",
+          "inputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video",
+              "required": true
+            },
+            {
+              "id": "images",
+              "label": "New object",
+              "type": "images",
+              "required": true
+            },
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "extra",
+              "label": "More settings (JSON of the model's own fields, e.g. {\"seed\": 7})",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.generate",
+          "label": "Higgsfield Any Model",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Runs any of Higgsfield's 83 models by its id with its own settings (JSON). Wired files go into its image/video/sound inputs.",
+          "inputs": [
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text"
+            },
+            {
+              "id": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "id": "images",
+              "label": "Pictures",
+              "type": "images"
+            },
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "audio",
+              "label": "Sound",
+              "type": "audio"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "id": "images",
+              "label": "All images",
+              "type": "images"
+            },
+            {
+              "id": "video",
+              "label": "Video",
+              "type": "video"
+            },
+            {
+              "id": "audio",
+              "label": "Sound",
+              "type": "audio"
+            },
+            {
+              "id": "files",
+              "label": "All files",
+              "type": "json"
+            },
+            {
+              "id": "request_id",
+              "label": "Request",
+              "type": "text"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "model",
+              "label": "Model id (e.g. kling-video/v3.0/pro/text-to-video)",
+              "type": "string"
+            },
+            {
+              "id": "params",
+              "label": "Settings (JSON)",
+              "type": "textarea"
+            },
+            {
+              "id": "duration",
+              "label": "Seconds (nearest the model offers)",
+              "type": "number"
+            },
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.estimate",
+          "label": "Higgsfield Estimate",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Free: what a model and settings cost in Higgsfield credits and dollars, before spending.",
+          "inputs": [
+            {
+              "id": "prompt",
+              "label": "Prompt",
+              "type": "text"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "credits",
+              "label": "Credits",
+              "type": "number"
+            },
+            {
+              "id": "usd",
+              "label": "USD",
+              "type": "number"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "model",
+              "label": "Model id (blank = Soul 2)",
+              "type": "string"
+            },
+            {
+              "id": "params",
+              "label": "Settings (JSON)",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield.create_character",
+          "label": "Higgsfield Soul ID Character",
+          "group": "Higgsfield",
+          "exec": false,
+          "description": "Trains a reusable character from photos of one person; put its id in custom_reference_id of the matching Soul model.",
+          "inputs": [
+            {
+              "id": "images",
+              "label": "Photos",
+              "type": "images",
+              "required": true
+            },
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "reference_id",
+              "label": "Character id",
+              "type": "text"
+            },
+            {
+              "id": "info",
+              "label": "Info",
+              "type": "json"
+            }
+          ],
+          "config_fields": [
+            {
+              "id": "spend",
+              "label": "Spend credits",
+              "type": "boolean"
+            },
+            {
+              "id": "version",
+              "label": "For",
+              "type": "select",
+              "options": [
+                {
+                  "id": "v2",
+                  "label": "Soul 2"
+                },
+                {
+                  "id": "v1",
+                  "label": "Soul"
+                },
+                {
+                  "id": "cinema",
+                  "label": "Soul Cinema"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "templates": [
+        {
+          "id": "higgsfield-prompt-picture-video",
+          "label": "Higgsfield: prompt → picture → video",
+          "icon": "🎬",
+          "category": "Video",
+          "description": "A Soul 2 picture from your prompt, then animated into a Seedance 2.5 video. Turn on Spend credits on the Higgsfield steps before the first run.",
+          "graph": {
+            "nodes": [
+              {
+                "id": "q",
+                "type": "input.text",
+                "x": 0,
+                "y": 0,
+                "config": {
+                  "value": "A cartoon duck explorer on a floating island at sunrise, cinematic"
+                },
+                "label": "Prompt"
+              },
+              {
+                "id": "img",
+                "type": "higgsfield.text_to_image",
+                "x": 300,
+                "y": 0,
+                "config": {
+                  "aspect_ratio": "16:9"
+                }
+              },
+              {
+                "id": "v",
+                "type": "higgsfield.image_to_video",
+                "x": 600,
+                "y": 0,
+                "config": {
+                  "duration": 5
+                },
+                "label": {
+                  "prompt": "Gentle cinematic camera move, the scene comes alive"
+                }
+              },
+              {
+                "id": "p",
+                "type": "util.preview",
+                "x": 900,
+                "y": 0,
+                "config": {},
+                "label": "Video"
+              }
+            ],
+            "edges": [
+              {
+                "source": "q",
+                "target": "img",
+                "kind": "data",
+                "source_pin": "text",
+                "target_pin": "prompt"
+              },
+              {
+                "source": "img",
+                "target": "v",
+                "kind": "data",
+                "source_pin": "image",
+                "target_pin": "image"
+              },
+              {
+                "source": "v",
+                "target": "p",
+                "kind": "data",
+                "source_pin": "video",
+                "target_pin": "value"
+              }
+            ]
+          },
+          "requires_plugins": [
+            "higgsfield"
+          ]
+        },
+        {
+          "id": "higgsfield-prompt-video",
+          "label": "Higgsfield: prompt to video",
+          "icon": "🎥",
+          "category": "Video",
+          "description": "A video straight from your prompt (Seedance 2.5; pick Kling, Wan, Hailuo or others in the details). Turn on Spend credits on the Higgsfield steps before the first run.",
+          "graph": {
+            "nodes": [
+              {
+                "id": "q",
+                "type": "input.text",
+                "x": 0,
+                "y": 0,
+                "config": {
+                  "value": "Drone shot flying over a colorful game island with waterfalls, golden hour"
+                },
+                "label": "Prompt"
+              },
+              {
+                "id": "v",
+                "type": "higgsfield.text_to_video",
+                "x": 300,
+                "y": 0,
+                "config": {
+                  "duration": 5,
+                  "aspect_ratio": "16:9"
+                }
+              },
+              {
+                "id": "p",
+                "type": "util.preview",
+                "x": 600,
+                "y": 0,
+                "config": {},
+                "label": "Video"
+              }
+            ],
+            "edges": [
+              {
+                "source": "q",
+                "target": "v",
+                "kind": "data",
+                "source_pin": "text",
+                "target_pin": "prompt"
+              },
+              {
+                "source": "v",
+                "target": "p",
+                "kind": "data",
+                "source_pin": "video",
+                "target_pin": "value"
+              }
+            ]
+          },
+          "requires_plugins": [
+            "higgsfield"
+          ]
+        },
+        {
+          "id": "higgsfield-screenshot-shot",
+          "label": "Higgsfield: island screenshot → cinematic shot",
+          "icon": "🏝️",
+          "category": "Video",
+          "description": "Pick a screenshot of your island; it becomes a short cinematic camera move for a trailer or Discover video. Turn on Spend credits on the Higgsfield steps before the first run.",
+          "graph": {
+            "nodes": [
+              {
+                "id": "img",
+                "type": "input.image",
+                "x": 0,
+                "y": 0,
+                "config": {},
+                "label": "Screenshot"
+              },
+              {
+                "id": "v",
+                "type": "higgsfield.image_to_video",
+                "x": 300,
+                "y": 0,
+                "config": {
+                  "duration": 5
+                },
+                "label": {
+                  "prompt": "Slow cinematic push-in, gentle parallax, vivid colors, no new objects"
+                }
+              },
+              {
+                "id": "p",
+                "type": "util.preview",
+                "x": 600,
+                "y": 0,
+                "config": {},
+                "label": "Shot"
+              }
+            ],
+            "edges": [
+              {
+                "source": "img",
+                "target": "v",
+                "kind": "data",
+                "source_pin": "image",
+                "target_pin": "image"
+              },
+              {
+                "source": "v",
+                "target": "p",
+                "kind": "data",
+                "source_pin": "video",
+                "target_pin": "value"
+              }
+            ]
+          },
+          "requires_plugins": [
+            "higgsfield"
+          ]
+        },
+        {
+          "id": "higgsfield-thumbnail",
+          "label": "Higgsfield: island thumbnail art",
+          "icon": "🖼️",
+          "category": "Images",
+          "description": "A 16:9 thumbnail-style picture from your prompt (Soul 2), ready to check against Discover's rules. Turn on Spend credits on the Higgsfield steps before the first run.",
+          "graph": {
+            "nodes": [
+              {
+                "id": "q",
+                "type": "input.text",
+                "x": 0,
+                "y": 0,
+                "config": {
+                  "value": "Bold colorful key art of a duck hero leaping over a lava obby, game thumbnail, no text"
+                },
+                "label": "Prompt"
+              },
+              {
+                "id": "img",
+                "type": "higgsfield.text_to_image",
+                "x": 300,
+                "y": 0,
+                "config": {
+                  "aspect_ratio": "16:9"
+                }
+              },
+              {
+                "id": "p",
+                "type": "util.preview",
+                "x": 600,
+                "y": 0,
+                "config": {},
+                "label": "Thumbnail"
+              }
+            ],
+            "edges": [
+              {
+                "source": "q",
+                "target": "img",
+                "kind": "data",
+                "source_pin": "text",
+                "target_pin": "prompt"
+              },
+              {
+                "source": "img",
+                "target": "p",
+                "kind": "data",
+                "source_pin": "image",
+                "target_pin": "value"
+              }
+            ]
+          },
+          "requires_plugins": [
+            "higgsfield"
+          ]
+        },
+        {
+          "id": "higgsfield-motion-transfer",
+          "label": "Higgsfield: put a character into a video's moves",
+          "icon": "🕺",
+          "category": "Video",
+          "description": "Pick a dance or action video and a picture of your character; the character performs the moves. Turn on Spend credits on the Higgsfield steps before the first run.",
+          "graph": {
+            "nodes": [
+              {
+                "id": "vid",
+                "type": "input.video",
+                "x": 0,
+                "y": 0,
+                "config": {},
+                "label": "Moves video"
+              },
+              {
+                "id": "img",
+                "type": "input.image",
+                "x": 0,
+                "y": 160,
+                "config": {},
+                "label": "Character"
+              },
+              {
+                "id": "m",
+                "type": "higgsfield.motion_transfer",
+                "x": 300,
+                "y": 60,
+                "config": {}
+              },
+              {
+                "id": "p",
+                "type": "util.preview",
+                "x": 600,
+                "y": 60,
+                "config": {},
+                "label": "Video"
+              }
+            ],
+            "edges": [
+              {
+                "source": "vid",
+                "target": "m",
+                "kind": "data",
+                "source_pin": "video",
+                "target_pin": "video"
+              },
+              {
+                "source": "img",
+                "target": "m",
+                "kind": "data",
+                "source_pin": "image",
+                "target_pin": "image"
+              },
+              {
+                "source": "m",
+                "target": "p",
+                "kind": "data",
+                "source_pin": "video",
+                "target_pin": "value"
+              }
+            ]
+          },
+          "requires_plugins": [
+            "higgsfield"
+          ]
+        },
+        {
+          "id": "higgsfield-edit-picture",
+          "label": "Higgsfield: edit a picture",
+          "icon": "✏️",
+          "category": "Images",
+          "description": "Pick a picture and say what to change (new background, outfit, style). Turn on Spend credits on the Higgsfield steps before the first run.",
+          "graph": {
+            "nodes": [
+              {
+                "id": "img",
+                "type": "input.image",
+                "x": 0,
+                "y": 0,
+                "config": {},
+                "label": "Picture"
+              },
+              {
+                "id": "q",
+                "type": "input.text",
+                "x": 0,
+                "y": 160,
+                "config": {
+                  "value": "Make it a sunset scene with warm light"
+                },
+                "label": "Change"
+              },
+              {
+                "id": "e",
+                "type": "higgsfield.edit_image",
+                "x": 300,
+                "y": 60,
+                "config": {}
+              },
+              {
+                "id": "p",
+                "type": "util.preview",
+                "x": 600,
+                "y": 60,
+                "config": {},
+                "label": "Edited"
+              }
+            ],
+            "edges": [
+              {
+                "source": "img",
+                "target": "e",
+                "kind": "data",
+                "source_pin": "image",
+                "target_pin": "image"
+              },
+              {
+                "source": "q",
+                "target": "e",
+                "kind": "data",
+                "source_pin": "text",
+                "target_pin": "prompt"
+              },
+              {
+                "source": "e",
+                "target": "p",
+                "kind": "data",
+                "source_pin": "image",
+                "target_pin": "value"
+              }
+            ]
+          },
+          "requires_plugins": [
+            "higgsfield"
+          ]
+        }
+      ],
+      "image_generators": [
+        {
+          "id": "higgsfield_higgsfield_ai_soul_v2_standard",
+          "label": "Higgsfield · Soul 2",
+          "tool": "higgsfield_text_to_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "higgsfield-ai/soul/v2/standard"
+          },
+          "config_fields": [
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield_higgsfield_ai_soul_cinema",
+          "label": "Higgsfield · Soul Cinema",
+          "tool": "higgsfield_text_to_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "higgsfield-ai/soul/cinema"
+          },
+          "config_fields": [
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield_z_image_turbo",
+          "label": "Higgsfield · Z-Image Turbo",
+          "tool": "higgsfield_text_to_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "z-image/turbo"
+          },
+          "config_fields": [
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield_recraft_v4_1_text_to_image",
+          "label": "Higgsfield · Recraft V4.1",
+          "tool": "higgsfield_text_to_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "recraft/v4.1/text-to-image"
+          },
+          "config_fields": [
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield_ideogram_v4_0",
+          "label": "Higgsfield · Ideogram 4",
+          "tool": "higgsfield_text_to_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "ideogram/v4.0"
+          },
+          "config_fields": [
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield_alibaba_qwen_image_3_text_to_image",
+          "label": "Higgsfield · Qwen Image 3",
+          "tool": "higgsfield_text_to_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "alibaba/qwen-image-3/text-to-image"
+          },
+          "config_fields": [
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": "higgsfield_xai_grok_imagine_image_2_0",
+          "label": "Higgsfield · Grok Imagine Image 2",
+          "tool": "higgsfield_text_to_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "xai/grok-imagine-image-2.0"
+          },
+          "config_fields": [
+            {
+              "id": "aspect_ratio",
+              "label": "Aspect ratio (e.g. 16:9; blank = model default)",
+              "type": "string"
+            },
+            {
+              "id": "resolution",
+              "label": "Resolution (e.g. 720p, 1080p, 2k; blank = model default)",
+              "type": "string"
+            }
+          ]
+        }
+      ],
+      "media_backends": [
+        {
+          "node": "image.edit",
+          "id": "higgsfield_edit_image",
+          "label": "Higgsfield · Qwen Image 3 Edit",
+          "tool": "higgsfield_edit_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "alibaba/qwen-image-3/edit"
+          },
+          "pins": {
+            "image": "image",
+            "prompt": "prompt"
+          }
+        },
+        {
+          "node": "image.edit",
+          "id": "higgsfield_edit_image_grok",
+          "label": "Higgsfield · Grok Imagine Image 2",
+          "tool": "higgsfield_edit_image",
+          "credits": 0,
+          "paid": true,
+          "cost": "Higgsfield credits (priced per run)",
+          "args": {
+            "model": "xai/grok-imagine-image-2.0"
+          },
+          "pins": {
+            "image": "image",
+            "prompt": "prompt"
+          }
+        }
+      ]
+    }
+  },
+  "backend": {
+    "entry": "backend",
+    "register": "register"
+  }
+}

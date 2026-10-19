@@ -1,0 +1,5895 @@
+{
+ "source": "https://docs.higgsfield.ai/docs/models",
+ "models": [
+  {
+   "id": "alibaba/qwen-image-3/edit",
+   "title": "Qwen Image 3 — Edit images",
+   "family": "qwen-image-3_edit",
+   "kind": "image",
+   "workflow": "image-edit",
+   "required": [
+    "prompt",
+    "image_urls"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Optional random seed for similar, reproducible results."
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Positive prompt or editing instruction in Chinese or English. Alibaba recommends at most 4,500 tokens."
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 3,
+     "description": "One to three ordered public image URLs used as editing references.",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k",
+      "2k"
+     ],
+     "default": "1k",
+     "description": "Output resolution tier. Both tiers produce PNG images."
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "2:3",
+      "3:2",
+      "3:4",
+      "4:3",
+      "7:9",
+      "9:7",
+      "9:16",
+      "16:9",
+      "21:9"
+     ],
+     "default": "1:1",
+     "description": "Output aspect ratio. Exact provider-recommended dimensions are selected automatically."
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": true,
+     "description": "Improve the prompt before generation. Required when thinking mode is enabled."
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": true,
+     "description": "Use model reasoning to improve image quality. Requires prompt enhancement."
+    },
+    "negative_prompt": {
+     "type": "string",
+     "description": "Content, styles, or artifacts to avoid in the output."
+    },
+    "prompt_extend_mode": {
+     "type": "string",
+     "enum": [
+      "direct"
+     ],
+     "default": "direct",
+     "description": "Direct enhancement is available for every request; agent enhancement is text-to-image only."
+    }
+   },
+   "notes": [
+    "Provide 1–3 ordered reference image URLs. The list is required and cannot be empty.",
+    "enable_thinking defaults to true and requires prompt_extend=true. Set both to false to disable enhancement.",
+    "prompt_extend_mode accepts only direct; agent enhancement is unavailable on editing requests.",
+    "prompt must contain non-whitespace text. The 2k square output tier maps to 1536 by 1536 pixels."
+   ]
+  },
+  {
+   "id": "alibaba/qwen-image-3/text-to-image",
+   "title": "Qwen Image 3 — Text to image",
+   "family": "qwen-image-3_text-to-image",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Optional random seed for similar, reproducible results."
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Positive prompt or editing instruction in Chinese or English. Alibaba recommends at most 4,500 tokens."
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k",
+      "2k"
+     ],
+     "default": "1k",
+     "description": "Output resolution tier. Both tiers produce PNG images."
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "2:3",
+      "3:2",
+      "3:4",
+      "4:3",
+      "7:9",
+      "9:7",
+      "9:16",
+      "16:9",
+      "21:9"
+     ],
+     "default": "1:1",
+     "description": "Output aspect ratio. Exact provider-recommended dimensions are selected automatically."
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": true,
+     "description": "Improve the prompt before generation. Required when thinking mode is enabled."
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": true,
+     "description": "Use model reasoning to improve image quality. Requires prompt enhancement."
+    },
+    "negative_prompt": {
+     "type": "string",
+     "description": "Content, styles, or artifacts to avoid in the output."
+    },
+    "prompt_extend_mode": {
+     "type": "string",
+     "enum": [
+      "direct",
+      "agent"
+     ],
+     "default": "direct",
+     "description": "Direct enhancement is available for every request; agent enhancement is text-to-image only."
+    }
+   },
+   "notes": [
+    "prompt must contain non-whitespace text. The schema imposes no character maximum; its 4,500-token guidance is advisory.",
+    "enable_thinking defaults to true and requires prompt_extend=true. Set both to false to disable enhancement.",
+    "prompt_extend_mode supports direct or agent. No reference images are accepted by this endpoint.",
+    "resolution is a tier; 2k square maps to 1536 by 1536 pixels, not 2048 by 2048."
+   ]
+  },
+  {
+   "id": "higgsfield-ai/soul/cinema",
+   "title": "SOUL Cinema — Text to image",
+   "family": "soul-cinema_generate",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Prompt"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "9:16",
+      "16:9",
+      "4:3",
+      "3:4",
+      "1:1",
+      "2:3",
+      "3:2"
+     ],
+     "default": "1:1",
+     "description": "Aspect Ratio"
+    },
+    "enhance_prompt": {
+     "type": "boolean",
+     "default": false,
+     "description": "Enhance Prompt"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "custom_reference_id": {
+     "type": "string",
+     "default": null,
+     "format": "uuid",
+     "description": "Custom Reference Id"
+    },
+    "custom_reference_strength": {
+     "type": "number",
+     "default": 1.0,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "Custom Reference Strength"
+    },
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 1000000,
+     "description": "Seed"
+    },
+    "batch_size": {
+     "type": "integer",
+     "enum": [
+      1,
+      4
+     ],
+     "default": 1,
+     "description": "Batch Size"
+    }
+   },
+   "notes": [
+    "batch_size is 1 or 4 only. A custom_reference_id must belong to the calling account and have completed training.",
+    "aspect_ratio defaults to 1:1 and enhance_prompt defaults to false. seed defaults to a random integer from 1 to 1000000; explicit null is invalid.",
+    "Providing a custom_reference_id enables prompt enhancement for the character reference, even if enhance_prompt is false.",
+    "Cinema uses a fixed style; client-supplied style_id is ignored.",
+    "This model may be absent from model discovery; authorized requests can use the endpoint ID directly."
+   ]
+  },
+  {
+   "id": "higgsfield-ai/soul/standard",
+   "title": "SOUL — Text to image",
+   "family": "soul-standard_generate",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Prompt"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "9:16",
+      "16:9",
+      "4:3",
+      "3:4",
+      "1:1",
+      "2:3",
+      "3:2"
+     ],
+     "default": "4:3",
+     "description": "Aspect Ratio"
+    },
+    "enhance_prompt": {
+     "type": "boolean",
+     "default": false,
+     "description": "Enhance Prompt"
+    },
+    "style_id": {
+     "type": "string",
+     "default": "464ea177-8d40-4940-8d9d-b438bab269c7",
+     "format": "uuid",
+     "description": "Style Id"
+    },
+    "style_strength": {
+     "type": "number",
+     "default": 1.0,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "Style Strength"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "seed": {
+     "type": "integer",
+     "default": null,
+     "minimum": 1,
+     "maximum": 1000000,
+     "description": "Seed"
+    },
+    "custom_reference_id": {
+     "type": "string",
+     "default": null,
+     "format": "uuid",
+     "description": "Custom Reference Id"
+    },
+    "custom_reference_strength": {
+     "type": "number",
+     "default": 1.0,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "Custom Reference Strength"
+    },
+    "image_reference_url": {
+     "type": "string",
+     "default": null,
+     "maxLength": 2083,
+     "format": "uri",
+     "description": "Image Reference Url"
+    },
+    "batch_size": {
+     "type": "integer",
+     "enum": [
+      1,
+      4
+     ],
+     "default": 1,
+     "description": "Batch Size"
+    }
+   },
+   "notes": [
+    "batch_size is 1 or 4 only. A custom_reference_id must belong to the calling account and have completed training.",
+    "aspect_ratio defaults to 4:3; enhance_prompt defaults to false; style_id defaults to 464ea177-8d40-4940-8d9d-b438bab269c7.",
+    "Optional image_reference_url guides prompt enhancement; it is distinct from custom_reference_id for a trained character.",
+    "seed may be omitted or null; generation selects a random seed when it is absent.",
+    "Short prompts using the general style can be enhanced automatically even when enhance_prompt=false.",
+    "custom_reference_strength=0 uses the selected style's default character strength; it does not disable the character reference."
+   ]
+  },
+  {
+   "id": "higgsfield-ai/soul/v2/standard",
+   "title": "SOUL V2 — Text to image",
+   "family": "soul-2_generate",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Prompt"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "9:16",
+      "16:9",
+      "4:3",
+      "3:4",
+      "1:1",
+      "2:3",
+      "3:2"
+     ],
+     "default": "1:1",
+     "description": "Aspect Ratio"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "enhance_prompt": {
+     "type": "boolean",
+     "default": false,
+     "description": "Enhance Prompt"
+    },
+    "custom_reference_id": {
+     "type": "string",
+     "default": null,
+     "format": "uuid",
+     "description": "Custom Reference Id"
+    },
+    "custom_reference_strength": {
+     "type": "number",
+     "default": 1.0,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "Custom Reference Strength"
+    },
+    "style_id": {
+     "type": "string",
+     "default": "3db34ab5-3439-4317-9e03-08dc30852e69",
+     "format": "uuid",
+     "description": "Style Id"
+    },
+    "style_strength": {
+     "type": "number",
+     "default": 1.0,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "Style Strength"
+    },
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 1000000,
+     "description": "Seed"
+    },
+    "batch_size": {
+     "type": "integer",
+     "enum": [
+      1,
+      4
+     ],
+     "default": 1,
+     "description": "Batch Size"
+    }
+   },
+   "notes": [
+    "batch_size is 1 or 4 only. A custom_reference_id must belong to the calling account and have completed training.",
+    "aspect_ratio defaults to 1:1 and enhance_prompt defaults to false. seed defaults to a random integer from 1 to 1000000; explicit null is invalid.",
+    "style_id defaults to 3db34ab5-3439-4317-9e03-08dc30852e69. style_strength is accepted by the request schema but currently has no effect on generation.",
+    "Short prompts using the general style can be enhanced automatically even when enhance_prompt=false.",
+    "When using custom_reference_id, set custom_reference_strength to a value greater than 0 and no greater than 1. The schema accepts 0, but the current runtime fails to process it for a character reference."
+   ]
+  },
+  {
+   "id": "higgsfield/ads-studio/v1.0",
+   "title": "Ads Studio — Generate ads",
+   "family": "ads-studio_generate",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "niche": {
+     "type": "string",
+     "default": "",
+     "maxLength": 1000
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 8000
+    },
+    "language": {
+     "type": "string",
+     "default": "",
+     "maxLength": 80
+    },
+    "batch_size": {
+     "type": "integer",
+     "default": 1,
+     "minimum": 1,
+     "maximum": 8
+    },
+    "image_urls": {
+     "type": "array",
+     "default": [],
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "maxLength": 8192
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "4:5",
+      "5:4",
+      "16:9",
+      "9:16",
+      "4:3",
+      "3:4",
+      "21:9",
+      "3:2",
+      "2:3",
+      "2:1",
+      "1:2",
+      "3:1",
+      "1:3"
+     ],
+     "default": "1:1"
+    },
+    "target_audience": {
+     "type": "string",
+     "default": "",
+     "maxLength": 2000
+    }
+   },
+   "notes": [
+    "Submit one request with your brief. Ad concepts are prepared automatically, then rendered as images; no separate preparation or generate call is required.",
+    "batch_size selects 1–8 ad concepts. Each concept produces one image, so a fully successful batch returns batch_size images.",
+    "Rendering uses GPT Image 2.5 Flare with fixed 2k resolution and high quality. Exact dimensions depend on aspect_ratio. quality, resolution, renderer and fallback model are not public inputs.",
+    "All outputs in a batch use the requested aspect_ratio. Omitting it selects 1:1. The value auto is not supported.",
+    "Set HF_API_KEY_ID and HF_API_KEY_SECRET to your API credentials. Set a unique IDEMPOTENCY_KEY for each intended generation; reuse it only when retrying that same request."
+   ]
+  },
+  {
+   "id": "ideogram/v4.0",
+   "title": "Ideogram 4.0 — Generate",
+   "family": "ideogram-4_generate",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "maxLength": 2048,
+     "description": "Write your prompt here"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Input image"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "1:2",
+      "2:1",
+      "2:3",
+      "3:2",
+      "4:5",
+      "5:4",
+      "9:16",
+      "16:9",
+      "5:8",
+      "8:5",
+      "3:4",
+      "4:3",
+      "9:22",
+      "22:9",
+      "9:23",
+      "23:9",
+      "3:8",
+      "8:3",
+      "5:12",
+      "12:5",
+      "1:3",
+      "3:1"
+     ],
+     "default": "1:1",
+     "description": "Aspect ratio"
+    },
+    "image_weight": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "description": "How strongly the output should preserve the input image."
+    },
+    "rendering_speed": {
+     "type": "string",
+     "enum": [
+      "TURBO",
+      "DEFAULT",
+      "QUALITY"
+     ],
+     "default": "DEFAULT",
+     "description": "Rendering speed"
+    }
+   },
+   "notes": [
+    "Omit image_url for text-to-image; provide image_url for remix/editing.",
+    "image_weight controls preservation of the input image and applies to editing requests only; values are integers from 1 to 100.",
+    "The square 1:1 aspect ratio is applied by default, including when an input image is supplied.",
+    "rendering_speed values are case-sensitive: TURBO, DEFAULT, QUALITY. prompt must contain 2–2048 characters."
+   ]
+  },
+  {
+   "id": "marketing-studio/image",
+   "title": "Marketing Studio Image — 2.0 Alpha",
+   "family": "marketing-studio-image_generate-and-edit",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "quality": {
+     "type": "string",
+     "enum": [
+      "low",
+      "medium",
+      "high"
+     ],
+     "default": "high"
+    },
+    "preset_id": {
+     "type": "string",
+     "format": "uuid",
+     "description": "Preset ID"
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 16,
+     "description": "Image URLs",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "moderation": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "low"
+     ],
+     "default": "auto"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k",
+      "2k",
+      "4k"
+     ],
+     "default": "2k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "1:1",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "16:9",
+      "9:16",
+      "21:9"
+     ],
+     "default": "auto",
+     "description": "Aspect Ratio"
+    },
+    "enhance_prompt": {
+     "type": "boolean",
+     "default": false,
+     "description": "Enhance prompt"
+    }
+   },
+   "notes": [
+    "Omit image_urls for text-to-image; provide up to 16 URLs for editing when enhance_prompt=false.",
+    "enhance_prompt=true requires an existing preset_id and 1–2 image URLs: product first, optional person/model reference second. Discover presets with GET /marketing-studio/image/presets.",
+    "Reference images must be valid JPEG, PNG, or WebP. Oversized supported images are normalized before rendering.",
+    "With enhancement enabled, aspect_ratio=auto uses the preset ratio. With enhancement disabled, current production mappings use square output for auto.",
+    "The 1k/2k/4k values are resolution tiers; exact pixel dimensions depend on the aspect ratio.",
+    "With enhance_prompt=true, quality must be high. This endpoint accepts low, medium, or high for unenhanced requests."
+   ]
+  },
+  {
+   "id": "marketing-studio/image/flare",
+   "title": "Marketing Studio Image — 2.5 Flare",
+   "family": "marketing-studio-image_flare",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "quality": {
+     "type": "string",
+     "enum": [
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+     ],
+     "default": "high",
+     "description": "Quality"
+    },
+    "preset_id": {
+     "type": "string",
+     "format": "uuid",
+     "description": "Preset ID"
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 16,
+     "description": "Image URLs",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "moderation": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "low"
+     ],
+     "default": "auto"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k",
+      "2k",
+      "4k"
+     ],
+     "default": "2k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "1:1",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "16:9",
+      "9:16",
+      "21:9"
+     ],
+     "default": "auto",
+     "description": "Aspect Ratio"
+    },
+    "enhance_prompt": {
+     "type": "boolean",
+     "default": false,
+     "description": "Enhance prompt"
+    }
+   },
+   "notes": [
+    "Omit image_urls for text-to-image; provide up to 16 URLs for editing when enhance_prompt=false.",
+    "enhance_prompt=true requires an existing preset_id and 1–2 image URLs: product first, optional person/model reference second. Discover presets with GET /marketing-studio/image/presets.",
+    "Reference images must be valid JPEG, PNG, or WebP. Oversized supported images are normalized before rendering.",
+    "With enhancement enabled, aspect_ratio=auto uses the preset ratio. With enhancement disabled, current production mappings use square output for auto.",
+    "The 1k/2k/4k values are resolution tiers; exact pixel dimensions depend on the aspect ratio.",
+    "quality accepts low, medium, high, xhigh, max and remains selectable with enhancement enabled."
+   ]
+  },
+  {
+   "id": "marketing-studio/image/sunburst",
+   "title": "Marketing Studio Image — 2.5 Sunburst",
+   "family": "marketing-studio-image_sunburst",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "quality": {
+     "type": "string",
+     "enum": [
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+     ],
+     "default": "high",
+     "description": "Quality"
+    },
+    "preset_id": {
+     "type": "string",
+     "format": "uuid",
+     "description": "Preset ID"
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 16,
+     "description": "Image URLs",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "moderation": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "low"
+     ],
+     "default": "auto"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k",
+      "2k",
+      "4k"
+     ],
+     "default": "2k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "1:1",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "16:9",
+      "9:16",
+      "21:9"
+     ],
+     "default": "auto",
+     "description": "Aspect Ratio"
+    },
+    "enhance_prompt": {
+     "type": "boolean",
+     "default": false,
+     "description": "Enhance prompt"
+    }
+   },
+   "notes": [
+    "Omit image_urls for text-to-image; provide up to 16 URLs for editing when enhance_prompt=false.",
+    "enhance_prompt=true requires an existing preset_id and 1–2 image URLs: product first, optional person/model reference second. Discover presets with GET /marketing-studio/image/presets.",
+    "Reference images must be valid JPEG, PNG, or WebP. Oversized supported images are normalized before rendering.",
+    "With enhancement enabled, aspect_ratio=auto uses the preset ratio. With enhancement disabled, current production mappings use square output for auto.",
+    "The 1k/2k/4k values are resolution tiers; exact pixel dimensions depend on the aspect ratio.",
+    "quality accepts low, medium, high, xhigh, max and remains selectable with enhancement enabled."
+   ]
+  },
+  {
+   "id": "recraft/v4.1/pro/text-to-image",
+   "title": "Recraft V4.1 Pro — Text to image",
+   "family": "recraft-v4-1-pro_generate",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "colors": {
+     "type": "array",
+     "description": "Colors",
+     "items": {
+      "type": "object",
+      "properties": {
+       "rgb": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 255
+        }
+       }
+      }
+     }
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 10000,
+     "description": "Write your prompt here"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "2k"
+     ],
+     "default": "2k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "2:1",
+      "1:2",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "5:4",
+      "4:5",
+      "6:10",
+      "14:10",
+      "10:14",
+      "16:9",
+      "9:16"
+     ],
+     "default": "1:1",
+     "description": "Aspect ratio"
+    },
+    "output_format": {
+     "type": "string",
+     "enum": [
+      "jpg",
+      "png",
+      "webp"
+     ],
+     "default": "jpg",
+     "description": "Output format"
+    },
+    "background_color": {
+     "type": "object",
+     "description": "Background color"
+    }
+   },
+   "notes": [
+    "This variant accepts only resolution=2k; use the separate standard/Pro endpoint for the other resolution tier.",
+    "colors is an array of objects shaped as \\{\"rgb\": \\[R, G, B]}; background_color is one such object. Every RGB value is an integer 0–255, with exactly three entries.",
+    "output_format is jpg, png, or webp; default is jpg. No reference-image input is declared.",
+    "prompt must contain 1–10000 characters. Fourteen aspect-ratio values are listed in the schema, including 6:10, 14:10, and 10:14."
+   ]
+  },
+  {
+   "id": "recraft/v4.1/text-to-image",
+   "title": "Recraft V4.1 — Text to image",
+   "family": "recraft-v4-1_text-to-image",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "colors": {
+     "type": "array",
+     "description": "Colors",
+     "items": {
+      "type": "object",
+      "properties": {
+       "rgb": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 255
+        }
+       }
+      }
+     }
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 10000,
+     "description": "Write your prompt here"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k"
+     ],
+     "default": "1k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "2:1",
+      "1:2",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "5:4",
+      "4:5",
+      "6:10",
+      "14:10",
+      "10:14",
+      "16:9",
+      "9:16"
+     ],
+     "default": "1:1",
+     "description": "Aspect ratio"
+    },
+    "output_format": {
+     "type": "string",
+     "enum": [
+      "jpg",
+      "png",
+      "webp"
+     ],
+     "default": "jpg",
+     "description": "Output format"
+    },
+    "background_color": {
+     "type": "object",
+     "description": "Background color"
+    }
+   },
+   "notes": [
+    "This variant accepts only resolution=1k; use the separate standard/Pro endpoint for the other resolution tier.",
+    "colors is an array of objects shaped as \\{\"rgb\": \\[R, G, B]}; background_color is one such object. Every RGB value is an integer 0–255, with exactly three entries.",
+    "output_format is jpg, png, or webp; default is jpg. No reference-image input is declared.",
+    "prompt must contain 1–10000 characters. Fourteen aspect-ratio values are listed in the schema, including 6:10, 14:10, and 10:14."
+   ]
+  },
+  {
+   "id": "recraft/v4.1/utility/pro/text-to-image",
+   "title": "Recraft V4.1 Utility Pro — Text to image",
+   "family": "recraft-v4-1-utility-pro_text-to-image",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "colors": {
+     "type": "array",
+     "description": "Colors",
+     "items": {
+      "type": "object",
+      "properties": {
+       "rgb": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 255
+        }
+       }
+      }
+     }
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 10000,
+     "description": "Write your prompt here"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "2k"
+     ],
+     "default": "2k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "2:1",
+      "1:2",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "5:4",
+      "4:5",
+      "6:10",
+      "14:10",
+      "10:14",
+      "16:9",
+      "9:16"
+     ],
+     "default": "1:1",
+     "description": "Aspect ratio"
+    },
+    "output_format": {
+     "type": "string",
+     "enum": [
+      "jpg",
+      "png",
+      "webp"
+     ],
+     "default": "jpg",
+     "description": "Output format"
+    },
+    "background_color": {
+     "type": "object",
+     "description": "Background color"
+    }
+   },
+   "notes": [
+    "This variant accepts only resolution=2k; use the separate standard/Pro endpoint for the other resolution tier.",
+    "colors is an array of objects shaped as \\{\"rgb\": \\[R, G, B]}; background_color is one such object. Every RGB value is an integer 0–255, with exactly three entries.",
+    "output_format is jpg, png, or webp; default is jpg. No reference-image input is declared.",
+    "prompt must contain 1–10000 characters. Fourteen aspect-ratio values are listed in the schema, including 6:10, 14:10, and 10:14."
+   ]
+  },
+  {
+   "id": "recraft/v4.1/utility/text-to-image",
+   "title": "Recraft V4.1 Utility — Text to image",
+   "family": "recraft-v4-1-utility_text-to-image",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "colors": {
+     "type": "array",
+     "description": "Colors",
+     "items": {
+      "type": "object",
+      "properties": {
+       "rgb": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 255
+        }
+       }
+      }
+     }
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 10000,
+     "description": "Write your prompt here"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k"
+     ],
+     "default": "1k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "2:1",
+      "1:2",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "5:4",
+      "4:5",
+      "6:10",
+      "14:10",
+      "10:14",
+      "16:9",
+      "9:16"
+     ],
+     "default": "1:1",
+     "description": "Aspect ratio"
+    },
+    "output_format": {
+     "type": "string",
+     "enum": [
+      "jpg",
+      "png",
+      "webp"
+     ],
+     "default": "jpg",
+     "description": "Output format"
+    },
+    "background_color": {
+     "type": "object",
+     "description": "Background color"
+    }
+   },
+   "notes": [
+    "This variant accepts only resolution=1k; use the separate standard/Pro endpoint for the other resolution tier.",
+    "colors is an array of objects shaped as \\{\"rgb\": \\[R, G, B]}; background_color is one such object. Every RGB value is an integer 0–255, with exactly three entries.",
+    "output_format is jpg, png, or webp; default is jpg. No reference-image input is declared.",
+    "prompt must contain 1–10000 characters. Fourteen aspect-ratio values are listed in the schema, including 6:10, 14:10, and 10:14."
+   ]
+  },
+  {
+   "id": "xai/grok-imagine-image-2.0",
+   "title": "Grok Image 2.0 — Generate and edit",
+   "family": "grok-image-2_generate-and-edit",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "quality": {
+     "type": "string",
+     "enum": [
+      "low",
+      "medium"
+     ],
+     "default": "medium",
+     "description": "Quality"
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 10,
+     "description": "Input Images",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k",
+      "2k"
+     ],
+     "default": "1k",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "1:1",
+      "1:2",
+      "2:1",
+      "3:2",
+      "2:3",
+      "4:3",
+      "3:4",
+      "16:9",
+      "9:16"
+     ],
+     "default": "auto"
+    }
+   },
+   "notes": [
+    "Supports both text-to-image and editing: omit image_urls for generation, or supply up to 10 references for editing.",
+    "quality accepts low or medium only; resolution accepts 1k or 2k. aspect_ratio defaults to auto.",
+    "Reference images may be resized during preprocessing before submission. The request produces one image; no batch count is declared."
+   ]
+  },
+  {
+   "id": "z-image/turbo",
+   "title": "Z-Image Turbo — Generate",
+   "family": "z-image-turbo_generate",
+   "kind": "image",
+   "workflow": "text-to-image",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Optional random seed for similar, reproducible results."
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 800,
+     "description": "Positive prompt describing the desired content, style, and composition."
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "1k",
+      "2k"
+     ],
+     "default": "1k",
+     "description": "Output resolution tier. Both tiers produce PNG images."
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "1:1",
+      "2:3",
+      "3:2",
+      "3:4",
+      "4:3",
+      "7:9",
+      "9:7",
+      "9:16",
+      "16:9",
+      "21:9"
+     ],
+     "default": "1:1",
+     "description": "Output aspect ratio. Exact provider-recommended dimensions are selected automatically."
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": false,
+     "description": "Rewrite and reason over the prompt before generation; this uses the enhanced price tier."
+    }
+   },
+   "notes": [
+    "Text-to-image only. prompt must contain non-whitespace text and at most 800 characters.",
+    "prompt_extend defaults to false; enabling it uses the enhanced pricing tier.",
+    "The schema accepts 1k and 2k tiers, ten aspect ratios, and an optional integer seed from 0 to 2147483647."
+   ]
+  },
+  {
+   "id": "alibaba/happy-horse/image-to-video",
+   "title": "Happy Horse 1.0 — Image to video",
+   "family": "happy-horse-1_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    }
+   },
+   "notes": [
+    "The prompt is optional. This endpoint accepts one first-frame image; it does not support a last-frame image."
+   ]
+  },
+  {
+   "id": "alibaba/happy-horse/v1.1/image-to-video",
+   "title": "HappyHorse 1.1 — Image to video",
+   "family": "happy-horse-1-1_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p"
+    }
+   },
+   "notes": [
+    "The prompt is optional. This endpoint accepts one first-frame image; it does not support a last-frame image."
+   ]
+  },
+  {
+   "id": "alibaba/wan-3.0-prime/image-to-video",
+   "title": "Wan 3.0 Prime — Image to video",
+   "family": "wan-3-prime_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 30,
+     "description": "2-30 seconds."
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First Frame"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "adaptive"
+     ],
+     "default": "adaptive",
+     "description": "Aspect Ratio"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last Frame"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Sound"
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": false,
+     "description": "Deep Thinking"
+    }
+   },
+   "notes": [
+    "Use image_url for the first frame and optional end_image_url for the last frame. Reference arrays belong to the reference-to-video endpoint.",
+    "The schema accepts seed=0, but the current implementation only forwards a nonzero seed."
+   ]
+  },
+  {
+   "id": "alibaba/wan-3.0/image-to-video",
+   "title": "Wan 3.0 — Image to video",
+   "family": "wan-3_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 30,
+     "description": "2-30 seconds."
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First Frame"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "adaptive"
+     ],
+     "default": "adaptive",
+     "description": "Aspect Ratio"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last Frame"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Sound"
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": false,
+     "description": "Deep Thinking"
+    }
+   },
+   "notes": [
+    "Use image_url for the first frame and optional end_image_url for the last frame. Reference arrays belong to the reference-to-video endpoint.",
+    "The schema accepts seed=0, but the current implementation only forwards a nonzero seed."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.0/image-to-video",
+   "title": "Seedance 2.0 — Image to video",
+   "family": "seedance-2_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 15
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p",
+      "4k"
+     ],
+     "default": "720p"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "The prompt is optional. Output framing follows image_url; end_image_url is the optional last frame."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.5/image-to-video",
+   "title": "Seedance 2.5 — Image to video",
+   "family": "seedance-2-5_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 30
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "bitrate_mode": {
+     "type": "string",
+     "enum": [
+      "standard",
+      "high"
+     ],
+     "default": "high"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "The prompt is optional. Output framing follows image_url; end_image_url is the optional last frame."
+   ]
+  },
+  {
+   "id": "kling-video/o3/first-last-frame",
+   "title": "Kling O3 — First last frame",
+   "family": "kling-o3_first-last-frame",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro",
+      "4k"
+     ],
+     "default": "pro"
+    },
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "off"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ]
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+       }
+      }
+     }
+    },
+    "last_frame_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last frame URL"
+    },
+    "first_frame_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First frame URL"
+    }
+   },
+   "notes": [
+    "first_frame_url supplies the starting frame; last_frame_url is optional. These names differ from the image_url and last_image_url fields on Kling 3.0 image-to-video.",
+    "For a single shot, set multi_shots to false and provide prompt. For multiple shots, set multi_shots to true and provide 1–6 multi_prompt objects, each containing prompt and a positive integer duration.",
+    "Always include a non-empty top-level prompt, including when using multi_prompt.",
+    "Each shot prompt is limited to 512 characters. Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum.",
+    "Native audio uses sound: on or off and defaults to off.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated."
+   ]
+  },
+  {
+   "id": "kling-video/omni/first-last-frame",
+   "title": "Kling Omni — First last frame",
+   "family": "kling-omni_first-last-frame",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "first_frame_url"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro"
+     ],
+     "default": "pro"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9"
+    },
+    "last_frame_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last frame URL"
+    },
+    "first_frame_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First frame URL"
+    }
+   },
+   "notes": [
+    "first_frame_url supplies the starting frame; last_frame_url is optional. These names differ from the image_url and last_image_url fields on Kling 3.0 image-to-video.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated."
+   ]
+  },
+  {
+   "id": "kling-video/v2.5-turbo/pro/image-to-video",
+   "title": "Kling 2.5 Turbo — Pro image to video",
+   "family": "kling-2-5-turbo_pro-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "negative_prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Negative Prompt"
+    }
+   },
+   "notes": [
+    "duration accepts 5 or 10 seconds; 5 is the default.",
+    "This endpoint does not expose a sound or aspect_ratio field."
+   ]
+  },
+  {
+   "id": "kling-video/v2.5-turbo/standard/image-to-video",
+   "title": "Kling 2.5 Turbo — Standard image to video",
+   "family": "kling-2-5-turbo_standard-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "negative_prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Negative Prompt"
+    }
+   },
+   "notes": [
+    "duration accepts 5 or 10 seconds; 5 is the default.",
+    "This endpoint does not expose a sound or aspect_ratio field."
+   ]
+  },
+  {
+   "id": "kling-video/v2.6/pro/image-to-video",
+   "title": "Kling 2.6 — Pro image to video",
+   "family": "kling-2-6_pro-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "description": "Aspect ratio"
+    }
+   },
+   "notes": [
+    "duration accepts 5 or 10 seconds; 5 is the default.",
+    "Native audio uses sound: on or off and defaults to on."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0-turbo/image-to-video",
+   "title": "Kling 3.0 — Turbo · Image to video",
+   "family": "kling-3_turbo-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    }
+   },
+   "notes": [
+    "duration accepts integers from 3 to 15 seconds. resolution accepts 720p or 1080p and defaults to 720p.",
+    "This endpoint has no sound, multi_shots, elements, or last-frame field.",
+    "Keep prompt within 2,500 characters; longer prompts are truncated."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0/4k/image-to-video",
+   "title": "Kling 3.0 — 4K · Image to video",
+   "family": "kling-3_4k-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+       }
+      }
+     }
+    },
+    "last_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    }
+   },
+   "notes": [
+    "image_url is the first frame; last_image_url optionally sets the final frame.",
+    "Always include a non-empty top-level prompt, including when using multi_prompt. Keep it within 2,500 characters; longer prompts are truncated.",
+    "For custom shots, set multi_shots to true and provide 1–6 multi_prompt objects. Each object needs prompt (at most 512 characters) and duration (a positive integer from 1 to 15 seconds).",
+    "Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum. With multi_shots enabled and no custom shots, the top-level duration is retained.",
+    "Native audio uses sound: on or off and defaults to on.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0/pro/image-to-video",
+   "title": "Kling 3.0 — Pro · Image to video",
+   "family": "kling-3_pro-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+       }
+      }
+     }
+    },
+    "last_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    }
+   },
+   "notes": [
+    "image_url is the first frame; last_image_url optionally sets the final frame.",
+    "Always include a non-empty top-level prompt, including when using multi_prompt. Keep it within 2,500 characters; longer prompts are truncated.",
+    "For custom shots, set multi_shots to true and provide 1–6 multi_prompt objects. Each object needs prompt (at most 512 characters) and duration (a positive integer from 1 to 15 seconds).",
+    "Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum. With multi_shots enabled and no custom shots, the top-level duration is retained.",
+    "Native audio uses sound: on or off and defaults to on.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0/std/image-to-video",
+   "title": "Kling 3.0 — Standard · Image to video",
+   "family": "kling-3_standard-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+       }
+      }
+     }
+    },
+    "last_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    }
+   },
+   "notes": [
+    "image_url is the first frame; last_image_url optionally sets the final frame.",
+    "Always include a non-empty top-level prompt, including when using multi_prompt. Keep it within 2,500 characters; longer prompts are truncated.",
+    "For custom shots, set multi_shots to true and provide 1–6 multi_prompt objects. Each object needs prompt (at most 512 characters) and duration (a positive integer from 1 to 15 seconds).",
+    "Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum. With multi_shots enabled and no custom shots, the top-level duration is retained.",
+    "Native audio uses sound: on or off and defaults to on.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "lightricks/ltx-2.5/image-to-video/fast",
+   "title": "LTX-2.5 — Image to video fast",
+   "family": "ltx-2-5_image-to-video-fast",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "duration",
+    "image_url"
+   ],
+   "properties": {
+    "fps": {
+     "type": "integer",
+     "enum": [
+      24,
+      25,
+      48,
+      50
+     ],
+     "default": 25,
+     "description": "Frames per second"
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      6,
+      8,
+      10
+     ],
+     "default": 6,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First frame"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p",
+      "2k",
+      "4k"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last frame"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Generate audio"
+    },
+    "camera_movement": {
+     "type": "string",
+     "enum": [
+      "dolly_in",
+      "dolly_out",
+      "dolly_left",
+      "dolly_right",
+      "jib_up",
+      "jib_down",
+      "static",
+      "focus_shift"
+     ],
+     "description": "Camera movement"
+    }
+   },
+   "notes": [
+    "duration is marked required in the schema and has default 6; the API applies this top-level default before validation. The example includes it explicitly.",
+    "Fast supports 720p, 1080p, 2k or 4k and 24, 25, 48 or 50 fps.",
+    "image_url is the required first frame; end_image_url is an optional last frame. aspect_ratio explicitly controls output dimensions."
+   ]
+  },
+  {
+   "id": "lightricks/ltx-2.5/image-to-video/pro",
+   "title": "LTX-2.5 — Image to video pro",
+   "family": "ltx-2-5_image-to-video-pro",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "duration",
+    "image_url"
+   ],
+   "properties": {
+    "fps": {
+     "type": "integer",
+     "enum": [
+      24,
+      25,
+      50
+     ],
+     "default": 25,
+     "description": "Frames per second"
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      6,
+      8,
+      10
+     ],
+     "default": 6,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First frame"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last frame"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Generate audio"
+    },
+    "camera_movement": {
+     "type": "string",
+     "enum": [
+      "dolly_in",
+      "dolly_out",
+      "dolly_left",
+      "dolly_right",
+      "jib_up",
+      "jib_down",
+      "static",
+      "focus_shift"
+     ],
+     "description": "Camera movement"
+    }
+   },
+   "notes": [
+    "duration is marked required in the schema and has default 6; the API applies this top-level default before validation. The example includes it explicitly.",
+    "Pro supports 720p or 1080p and 24, 25 or 50 fps. Use the Fast endpoint for 2k, 4k or 48 fps.",
+    "image_url is the required first frame; end_image_url is an optional last frame. aspect_ratio explicitly controls output dimensions."
+   ]
+  },
+  {
+   "id": "minimax/h3/image-to-video",
+   "title": "MiniMax H3 — Image to video",
+   "family": "minimax-h3_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 5,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First frame URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "2K"
+     ],
+     "default": "2K",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "adaptive",
+      "21:9",
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16"
+     ],
+     "default": "auto",
+     "description": "Aspect ratio"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last frame URL"
+    },
+    "aigc_watermark": {
+     "type": "boolean",
+     "default": false,
+     "description": "AIGC watermark"
+    }
+   },
+   "notes": [
+    "Resolution is fixed to the case-sensitive schema value \"2K\". The prompt must contain non-whitespace text; the current provider serializer uses only its first 7,000 characters.",
+    "The output aspect ratio follows the input keyframe even when aspect_ratio is supplied. end_image_url is an optional last frame."
+   ]
+  },
+  {
+   "id": "minimax/hailuo-2.3/standard/image-to-video",
+   "title": "Hailuo 2.3 — Standard image to video",
+   "family": "hailuo-2-3_standard-image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      6,
+      10
+     ],
+     "default": 6,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "prompt_optimizer": {
+     "type": "boolean",
+     "default": true,
+     "description": "Prompt optimizer"
+    }
+   },
+   "notes": [
+    "This Standard endpoint uses a fixed 768P output resolution; resolution is not a configurable field in the production schema."
+   ]
+  },
+  {
+   "id": "pixverse/v6/image-to-video",
+   "title": "PixVerse V6 — Image to video",
+   "family": "pixverse-v6_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "number",
+     "default": 5,
+     "minimum": 1,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First frame"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "360p",
+      "540p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last frame"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Generate audio"
+    },
+    "negative_prompt": {
+     "type": "string",
+     "maxLength": 2048,
+     "description": "Negative prompt"
+    }
+   },
+   "notes": [
+    "duration is a number from 1 to 15, so the schema allows fractional values. If negative_prompt is supplied, it must contain 1–2,048 characters.",
+    "Use image_url for the first frame and optional end_image_url for the last frame. This endpoint has no aspect_ratio parameter; framing comes from the input image."
+   ]
+  },
+  {
+   "id": "wan/v2.6/image-to-video",
+   "title": "Wan 2.6 — Image to video",
+   "family": "wan-2-6_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "prompt",
+    "image_url"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": -1,
+     "maximum": 10000000
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10,
+      15
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "audio_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Audio URL"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": false
+    },
+    "negative_prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Negative prompt"
+    }
+   },
+   "notes": [
+    "Setting multi_shots=true also enables prompt_extend, even if prompt_extend was false.",
+    "Input images may be resized to fit a 1,440-pixel maximum dimension before generation. A last-frame input is unsupported."
+   ]
+  },
+  {
+   "id": "wan/v2.7/image-to-video",
+   "title": "Wan 2.7 — Image to video",
+   "family": "wan-2-7_image-to-video",
+   "kind": "video",
+   "workflow": "image-to-video",
+   "required": [
+    "image_url"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "audio_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Audio URL"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "end_image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": false
+    },
+    "negative_prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Negative prompt"
+    }
+   },
+   "notes": [
+    "The prompt is optional. end_image_url supplies a last frame, and audio_url can supply driving audio."
+   ]
+  },
+  {
+   "id": "higgsfield/genjutsu/motion-transfer/v1.0",
+   "title": "Genjutsu — Motion transfer",
+   "family": "genjutsu_motion-transfer",
+   "kind": "video",
+   "workflow": "motion",
+   "required": [
+    "video_url",
+    "image_urls"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "default": "",
+     "maxLength": 10000,
+     "description": "Prompt"
+    },
+    "video_url": {
+     "type": "string",
+     "maxLength": 2083,
+     "format": "uri",
+     "description": "Video Url"
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 8,
+     "description": "Image Urls",
+     "items": {
+      "type": "string",
+      "maxLength": 2083,
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "480p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    }
+   },
+   "notes": [
+    "Use higgsfield/genjutsu/motion-transfer/v1.0 for new integrations. The legacy endpoint higgsfiled/genjutsu/motion-transfer/v1.0 remains callable for existing clients but is hidden from model discovery.",
+    "The source video must be at least 4 seconds. Videos longer than 30 seconds are trimmed to 30 seconds; output duration follows the prepared source video.",
+    "Provide 1–8 image references. The prompt is optional and defaults to an empty string."
+   ]
+  },
+  {
+   "id": "kling-video/motion-control/pro",
+   "title": "Kling 2.6 Motion Control — Pro",
+   "family": "kling-2-6-motion-control_pro",
+   "kind": "video",
+   "workflow": "motion",
+   "required": [
+    "image_url",
+    "video_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Write your prompt here"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "video_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Video URL"
+    },
+    "keep_original_sound": {
+     "type": "string",
+     "enum": [
+      "yes",
+      "no"
+     ],
+     "default": "yes",
+     "description": "Keep original sound"
+    },
+    "character_orientation": {
+     "type": "string",
+     "enum": [
+      "image",
+      "video"
+     ],
+     "default": "video",
+     "description": "Generate the orientation of the characters in the video, which can be selected to match the image or the video"
+    }
+   },
+   "notes": [
+    "Use a motion-reference video from 3 to 30 seconds long. The output duration follows the source video; do not send a separate duration field.",
+    "Use a character image up to 10 MB with each dimension between 300 and 65,536 pixels. Images outside the 0.4–2.5 width-to-height range are adjusted before generation.",
+    "Videos larger than 100 MB are compressed before generation.",
+    "Set character_orientation to image or video. keep_original_sound uses the strings yes and no, with yes as the default."
+   ]
+  },
+  {
+   "id": "kling-video/motion-control/std",
+   "title": "Kling 2.6 Motion Control — Standard",
+   "family": "kling-2-6-motion-control_std",
+   "kind": "video",
+   "workflow": "motion",
+   "required": [
+    "image_url",
+    "video_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Write your prompt here"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "video_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Video URL"
+    },
+    "keep_original_sound": {
+     "type": "string",
+     "enum": [
+      "yes",
+      "no"
+     ],
+     "default": "yes",
+     "description": "Keep original sound"
+    },
+    "character_orientation": {
+     "type": "string",
+     "enum": [
+      "image",
+      "video"
+     ],
+     "default": "video",
+     "description": "Generate the orientation of the characters in the video, which can be selected to match the image or the video"
+    }
+   },
+   "notes": [
+    "Use a motion-reference video from 3 to 30 seconds long. The output duration follows the source video; do not send a separate duration field.",
+    "Use a character image up to 10 MB with each dimension between 300 and 65,536 pixels. Images outside the 0.4–2.5 width-to-height range are adjusted before generation.",
+    "Videos larger than 100 MB are compressed before generation.",
+    "Set character_orientation to image or video. keep_original_sound uses the strings yes and no, with yes as the default."
+   ]
+  },
+  {
+   "id": "kling-video/v3/motion-control/pro",
+   "title": "Kling 3.0 Motion Control — Pro",
+   "family": "kling-3-motion-control_pro",
+   "kind": "video",
+   "workflow": "motion",
+   "required": [
+    "image_url",
+    "video_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Write your prompt here"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "video_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Video URL"
+    },
+    "keep_original_sound": {
+     "type": "string",
+     "enum": [
+      "yes",
+      "no"
+     ],
+     "default": "yes",
+     "description": "Keep original sound"
+    },
+    "character_orientation": {
+     "type": "string",
+     "enum": [
+      "image",
+      "video"
+     ],
+     "default": "video",
+     "description": "Generate the orientation of the characters in the video, which can be selected to match the image or the video"
+    }
+   },
+   "notes": [
+    "Use a motion-reference video from 3 to 30 seconds long. The output duration follows the source video; do not send a separate duration field.",
+    "Use a character image up to 10 MB with each dimension between 300 and 65,536 pixels. Images outside the 0.4–2.5 width-to-height range are adjusted before generation.",
+    "Videos larger than 100 MB are compressed before generation.",
+    "Set character_orientation to image or video. keep_original_sound uses the strings yes and no, with yes as the default."
+   ]
+  },
+  {
+   "id": "kling-video/v3/motion-control/std",
+   "title": "Kling 3.0 Motion Control — Standard",
+   "family": "kling-3-motion-control_std",
+   "kind": "video",
+   "workflow": "motion",
+   "required": [
+    "image_url",
+    "video_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Write your prompt here"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Image URL"
+    },
+    "video_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Video URL"
+    },
+    "keep_original_sound": {
+     "type": "string",
+     "enum": [
+      "yes",
+      "no"
+     ],
+     "default": "yes",
+     "description": "Keep original sound"
+    },
+    "character_orientation": {
+     "type": "string",
+     "enum": [
+      "image",
+      "video"
+     ],
+     "default": "video",
+     "description": "Generate the orientation of the characters in the video, which can be selected to match the image or the video"
+    }
+   },
+   "notes": [
+    "Use a motion-reference video from 3 to 30 seconds long. The output duration follows the source video; do not send a separate duration field.",
+    "Use a character image up to 10 MB with each dimension between 300 and 65,536 pixels. Images outside the 0.4–2.5 width-to-height range are adjusted before generation.",
+    "Videos larger than 100 MB are compressed before generation.",
+    "Set character_orientation to image or video. keep_original_sound uses the strings yes and no, with yes as the default."
+   ]
+  },
+  {
+   "id": "higgsfield/genjutsu/object-swap/v1.0",
+   "title": "Genjutsu — Object swap",
+   "family": "genjutsu_object-swap",
+   "kind": "video",
+   "workflow": "object-swap",
+   "required": [
+    "video_url",
+    "image_urls"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "default": "",
+     "maxLength": 10000,
+     "description": "Prompt"
+    },
+    "video_url": {
+     "type": "string",
+     "maxLength": 2083,
+     "format": "uri",
+     "description": "Video Url"
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 8,
+     "description": "Image Urls",
+     "items": {
+      "type": "string",
+      "maxLength": 2083,
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "480p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    }
+   },
+   "notes": [
+    "Use higgsfield/genjutsu/object-swap/v1.0 for new integrations. The legacy endpoint higgsfiled/genjutsu/object-swap/v1.0 remains callable for existing clients but is hidden from model discovery.",
+    "The source video must be at least 4 seconds. Videos longer than 30 seconds are trimmed to 30 seconds; output duration follows the prepared source video.",
+    "Provide 1–8 image references. The prompt is optional and defaults to an empty string.",
+    "The source video must contain at least 409,600 pixels per frame (width × height)."
+   ]
+  },
+  {
+   "id": "alibaba/happy-horse/reference-to-video",
+   "title": "Happy Horse 1.0 — Reference to video",
+   "family": "happy-horse-1_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "image_urls",
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "image_urls": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    }
+   },
+   "notes": [
+    "Provide 1–9 reference images. This limit is enforced at submission even though the stored JSON Schema does not set minItems or maxItems. Reference videos are unsupported."
+   ]
+  },
+  {
+   "id": "alibaba/happy-horse/v1.1/reference-to-video",
+   "title": "HappyHorse 1.1 — Reference to video",
+   "family": "happy-horse-1-1_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "image_urls",
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "image_urls": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p"
+    }
+   },
+   "notes": [
+    "Provide 1–9 reference images. This limit is enforced at submission even though the stored JSON Schema does not set minItems or maxItems. Reference videos are unsupported."
+   ]
+  },
+  {
+   "id": "alibaba/wan-3.0-prime/reference-to-video",
+   "title": "Wan 3.0 Prime — Reference to video",
+   "family": "wan-3-prime_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 30,
+     "description": "2-30 seconds."
+    },
+    "file_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "One document (docx/xlsx/pptx/pdf/md). Forces deep thinking."
+    },
+    "link_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "One public page. Forces deep thinking. Not combinable with file_url."
+    },
+    "audio_urls": {
+     "type": "array",
+     "maxItems": 5,
+     "description": "Up to 5 files, 30s total. WAV or MP3.",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "maxItems": 10,
+     "description": "Reference Images",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p",
+     "description": "Resolution"
+    },
+    "video_urls": {
+     "type": "array",
+     "maxItems": 5,
+     "description": "Up to 5 clips, 30s total, each 1-30s.",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "adaptive"
+     ],
+     "default": "adaptive",
+     "description": "Aspect Ratio"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Sound"
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": false,
+     "description": "Deep Thinking"
+    }
+   },
+   "notes": [
+    "Reference media are optional in the stored schema: only prompt is required. The example includes an image to demonstrate reference mode.",
+    "Send either file_url or link_url. A document or web-page reference automatically enables thinking; when both are sent, file_url takes precedence.",
+    "Reference video clips must be 1–30 seconds each and total at most 30 seconds. Reference audio must be WAV or MP3 and total at most 30 seconds, as specified in the production schema.",
+    "The schema accepts seed=0, but the current implementation only forwards a nonzero seed."
+   ]
+  },
+  {
+   "id": "alibaba/wan-3.0/reference-to-video",
+   "title": "Wan 3.0 — Reference to video",
+   "family": "wan-3_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 30,
+     "description": "2-30 seconds."
+    },
+    "file_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "One document (docx/xlsx/pptx/pdf/md). Forces deep thinking."
+    },
+    "link_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "One public page. Forces deep thinking. Not combinable with file_url."
+    },
+    "audio_urls": {
+     "type": "array",
+     "maxItems": 5,
+     "description": "Up to 5 files, 30s total. WAV or MP3.",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "maxItems": 10,
+     "description": "Reference Images",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p",
+     "description": "Resolution"
+    },
+    "video_urls": {
+     "type": "array",
+     "maxItems": 5,
+     "description": "Up to 5 clips, 30s total, each 1-30s.",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "adaptive"
+     ],
+     "default": "adaptive",
+     "description": "Aspect Ratio"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Sound"
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": false,
+     "description": "Deep Thinking"
+    }
+   },
+   "notes": [
+    "Reference media are optional in the stored schema: only prompt is required. The example includes an image to demonstrate reference mode.",
+    "Send either file_url or link_url. A document or web-page reference automatically enables thinking; when both are sent, file_url takes precedence.",
+    "Reference video clips must be 1–30 seconds each and total at most 30 seconds. Reference audio must be WAV or MP3 and total at most 30 seconds, as specified in the production schema.",
+    "The schema accepts seed=0, but the current implementation only forwards a nonzero seed."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.0/reference-to-video",
+   "title": "Seedance 2.0 — Reference to video",
+   "family": "seedance-2_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 15
+    },
+    "audio_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 3,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 9,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p",
+      "4k"
+     ],
+     "default": "720p"
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 3,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "21:9"
+     ],
+     "default": "16:9"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "Provide a nonempty image_urls or video_urls array. Audio alone does not satisfy the reference requirement. Do not mix reference arrays with image_url, end_image_url or video_url.",
+    "Reference videos may be resized, transcoded and trimmed to 15 seconds each. Reference audio is normalized to 2–15 seconds per file and at most 15 seconds total."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.5/reference-to-video",
+   "title": "Seedance 2.5 — Reference to video",
+   "family": "seedance-2-5_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 30
+    },
+    "audio_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 30,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "21:9"
+     ],
+     "default": "16:9"
+    },
+    "bitrate_mode": {
+     "type": "string",
+     "enum": [
+      "standard",
+      "high"
+     ],
+     "default": "high"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "Provide at least one nonempty reference array: image_urls, video_urls or audio_urls. Audio-only references are supported by this schema and preprocessing path.",
+    "Reference media are limited to 30 images, 10 videos and 10 audio files, with at most 50 items total. Video duration and audio duration are normalized separately to at most 30 seconds total per media type."
+   ]
+  },
+  {
+   "id": "higgsfield/cinema-studio/4.0",
+   "title": "Cinema Studio 4.0 — Generate",
+   "family": "cinema-studio-4_generate",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "era": {
+     "type": "string",
+     "enum": [
+      "1960s",
+      "1980s",
+      "1990s",
+      "2000s",
+      "2020s"
+     ]
+    },
+    "genre": {
+     "type": "string",
+     "enum": [
+      "epic",
+      "drama",
+      "noir",
+      "comedy",
+      "horror",
+      "action"
+     ]
+    },
+    "light": {
+     "type": "string",
+     "enum": [
+      "silhouette",
+      "practicals",
+      "window",
+      "overhead-fall",
+      "contre-jour",
+      "soft-cross"
+     ]
+    },
+    "pacing": {
+     "type": "string",
+     "enum": [
+      "chaotic",
+      "dynamic",
+      "calm",
+      "single-shot"
+     ]
+    },
+    "prompt": {
+     "type": "string"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 30
+    },
+    "audio_urls": {
+     "type": "array",
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "maxItems": 30,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p"
+     ],
+     "default": "720p"
+    },
+    "video_urls": {
+     "type": "array",
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "camera_lens": {
+     "type": "string",
+     "enum": [
+      "clean-sharp",
+      "anamorphic",
+      "vintage-anamorphic",
+      "warm-vintage",
+      "halation-vintage"
+     ]
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "21:9"
+     ],
+     "default": "16:9"
+    },
+    "camera_model": {
+     "type": "string",
+     "enum": [
+      "modern",
+      "35mm-film",
+      "8mm-film",
+      "dv-camcorder"
+     ]
+    },
+    "color_palette": {
+     "type": "string",
+     "enum": [
+      "static-noon",
+      "twilight-fable",
+      "back-row-kissing-seats",
+      "on-the-other-side-of-the-porthole",
+      "the-emerald-ambush",
+      "highway-standoff",
+      "the-faded-fresco",
+      "oil-ochre",
+      "the-mountain-convent",
+      "ghost-in-the-code",
+      "pink-velvet",
+      "two-days-to-the-horizon",
+      "industrial-fog",
+      "stairs-go-up",
+      "field-post",
+      "home-is-the-next-gas-station",
+      "glossy-flesh",
+      "the-crimson-ballet",
+      "neon-rain-at-midnight",
+      "the-morning-after-rain",
+      "the-iron-borough",
+      "the-ground",
+      "the-investigation",
+      "turquoise-mirage",
+      "a-dream-in-color",
+      "breakfast-on-schedule",
+      "favela-gold",
+      "a-hotel-for-one",
+      "after-dark",
+      "crimson-vigi",
+      "the-neighbors-saw-everything",
+      "the-grey-channel",
+      "mirage-at-noon",
+      "bubblegum-boulevard",
+      "yellow-room",
+      "the-earth-keeps-things-reluctantly",
+      "tropic-fever-dream",
+      "bioluminescent-night",
+      "dont-turn-it-off-im-watching",
+      "the-silk-curtain-falls",
+      "the-butterfly",
+      "playtime",
+      "wallpaper-romance",
+      "overtime",
+      "the-way-home-is-longer",
+      "everyone-speaks-in-whispers",
+      "runaway-summer",
+      "amber-wasteland",
+      "the-circus",
+      "gasoline-sunset"
+     ]
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    },
+    "camera_aperture": {
+     "type": "string",
+     "enum": [
+      "f14-wide-open",
+      "f4-moderate",
+      "f11-deep-focus"
+     ]
+    },
+    "camera_movement": {
+     "type": "string",
+     "enum": [
+      "snorricam",
+      "robot-arm",
+      "tilt-up",
+      "rack-focus",
+      "tilt-down",
+      "pov",
+      "pan-left",
+      "crane-up",
+      "pan-right",
+      "crane-down",
+      "side-tracking",
+      "pedestal-up",
+      "pedestal-down",
+      "handheld",
+      "tracking",
+      "drone-orbit",
+      "dolly-zoom",
+      "aerial-pullback",
+      "static-shot",
+      "bullet-time",
+      "whip-pan",
+      "slow-zoom-in",
+      "arc-left",
+      "slow-zoom-out",
+      "arc-right",
+      "truck-right",
+      "dolly-in",
+      "truck-left",
+      "dolly-out",
+      "slider-right",
+      "crush-zoom",
+      "slider-left",
+      "helicopter-shot"
+     ]
+    }
+   },
+   "notes": [
+    "This is the public Cinema Studio 4.0 workflow. It uses text-to-video when references are absent and reference-to-video when any media array is nonempty.",
+    "Omit creative-control fields to let the director choose them automatically; the literal value \"auto\" is not accepted for these enum fields.",
+    "Optional prompt references use one-based tokens such as \\<\\<\\<image_1>>>, \\<\\<\\<video_1>>> and \\<\\<\\<audio_1>>>. Each token must refer to an attached item of the same media type.",
+    "This endpoint produces a new video. Editing and extension use the separate Seedance 2.5 endpoints.",
+    "Reference media are limited to 30 images, 10 videos and 10 audio files, with at most 50 items total. Video and audio may be normalized to separate 30-second total budgets."
+   ]
+  },
+  {
+   "id": "kling-video/o3/image-reference",
+   "title": "Kling O3 — Image reference",
+   "family": "kling-o3_image-reference",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro",
+      "4k"
+     ],
+     "default": "std"
+    },
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "off"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "shot_type": {
+     "type": "string",
+     "enum": [
+      "customize",
+      "intelligent"
+     ],
+     "default": "customize"
+    },
+    "image_urls": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ]
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 15
+       }
+      }
+     }
+    },
+    "last_frame_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Last frame URL"
+    },
+    "first_frame_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First frame URL"
+    }
+   },
+   "notes": [
+    "Supply image_urls for visual references. Reference images are optional in the schema.",
+    "For a single shot, set multi_shots to false and provide prompt. For multiple shots, set multi_shots to true and provide 1–6 multi_prompt objects, each containing prompt and a positive integer duration.",
+    "Always include a non-empty top-level prompt, including when using multi_prompt.",
+    "Each shot prompt is limited to 512 characters. Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum.",
+    "Native audio uses sound: on or off and defaults to off.",
+    "A multi_prompt shot must last at least 1 second; zero-second shots are rejected even though the schema permits zero.",
+    "When multi_shots is true, multi_prompt is required even with shot_type set to intelligent.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated."
+   ]
+  },
+  {
+   "id": "kling-video/o3/video-reference",
+   "title": "Kling O3 — Video reference",
+   "family": "kling-o3_video-reference",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt",
+    "video_urls"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro"
+     ],
+     "default": "pro"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 10,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 1,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Video URL"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ]
+    }
+   },
+   "notes": [
+    "Supply exactly one video reference. duration controls the generated clip and accepts integer values from 3 to 10 seconds.",
+    "You may also supply up to four image_urls and up to four elements.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "kling-video/omni/image-reference",
+   "title": "Kling Omni — Image reference",
+   "family": "kling-omni_image-reference",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro"
+     ],
+     "default": "pro"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 10,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9"
+    }
+   },
+   "notes": [
+    "Supply image_urls for visual references. Reference images are optional in the schema.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "kling-video/omni/video-reference",
+   "title": "Kling Omni — Video reference",
+   "family": "kling-omni_video-reference",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt",
+    "video_urls"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro"
+     ],
+     "default": "pro"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 10,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 1,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Video URL"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9"
+    }
+   },
+   "notes": [
+    "Supply exactly one video reference. duration controls the generated clip and accepts integer values from 3 to 10 seconds.",
+    "You may also supply up to four image_urls and up to four elements.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "minimax/h3/reference-to-video",
+   "title": "MiniMax H3 — Reference to video",
+   "family": "minimax-h3_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 5,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "audio_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 3,
+     "description": "Reference audio URLs",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 9,
+     "description": "Reference image URLs",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "2K"
+     ],
+     "default": "2K",
+     "description": "Resolution"
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 3,
+     "description": "Reference video URLs",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "adaptive",
+      "21:9",
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16"
+     ],
+     "default": "auto",
+     "description": "Aspect ratio"
+    },
+    "aigc_watermark": {
+     "type": "boolean",
+     "default": false,
+     "description": "AIGC watermark"
+    }
+   },
+   "notes": [
+    "Resolution is fixed to the case-sensitive schema value \"2K\". The prompt must contain non-whitespace text; the current provider serializer uses only its first 7,000 characters.",
+    "Provide at least one image or video reference. Audio references require an image or video reference and cannot be used alone.",
+    "Reference media may be cropped, resized, transcoded and trimmed. Video duration and audio duration are each normalized to fit within the provider's 15-second total budget."
+   ]
+  },
+  {
+   "id": "wan/v2.6/reference-to-video",
+   "title": "Wan 2.6 — Reference to video",
+   "family": "wan-2-6_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt",
+    "video_urls"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 3,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Video URL"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4"
+     ],
+     "default": "16:9"
+    }
+   },
+   "notes": [
+    "Supply 1–3 reference videos. This endpoint supports only 5 or 10 seconds, unlike the text and image endpoints that also support 15 seconds."
+   ]
+  },
+  {
+   "id": "wan/v2.7/reference-to-video",
+   "title": "Wan 2.7 — Reference to video",
+   "family": "wan-2-7_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 10,
+     "description": "Duration"
+    },
+    "image_urls": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "video_urls": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Video"
+     }
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16"
+     ],
+     "default": "16:9",
+     "description": "Aspect Ratio"
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": false
+    },
+    "negative_prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Negative prompt"
+    }
+   },
+   "notes": [
+    "Provide a nonempty image_urls or video_urls array. The combined number of image and video references must not exceed 5; this submission limit is not expressed in the stored JSON Schema.",
+    "Reference generation is limited to 2–10 seconds and aspect ratios 16:9 or 9:16."
+   ]
+  },
+  {
+   "id": "xai/grok-imagine-video/v1.5/reference-to-video",
+   "title": "Grok Imagine Video 1.5 — Reference to video",
+   "family": "grok-video-1-5_reference-to-video",
+   "kind": "video",
+   "workflow": "reference-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 1,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "audio_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Reference audio"
+    },
+    "image_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "First-frame image"
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 7,
+     "description": "Reference images",
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "480p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "1:1",
+      "16:9",
+      "9:16",
+      "4:3",
+      "3:4",
+      "3:2",
+      "2:3"
+     ],
+     "default": "auto"
+    }
+   },
+   "notes": [
+    "This endpoint also accepts text-only requests or one first-frame image. Choose either image_url or reference media (image_urls/audio_url); do not combine these modes.",
+    "When image_urls or audio_url is provided, resolution must be 480p or 720p. The shared schema also lists 1080p, which is rejected in reference mode.",
+    "Input images must decode as JPEG, PNG, WebP or GIF; SVG and XML are unsupported."
+   ]
+  },
+  {
+   "id": "higgsfield/genjutsu/restyle/v1.0",
+   "title": "Genjutsu — Restyle",
+   "family": "genjutsu_restyle",
+   "kind": "video",
+   "workflow": "restyle",
+   "required": [
+    "video_url",
+    "preset_id"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "default": "",
+     "maxLength": 10000,
+     "description": "Prompt"
+    },
+    "preset_id": {
+     "type": "string",
+     "format": "uuid",
+     "description": "Style preset"
+    },
+    "video_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Source video, 4–30 seconds. Longer videos are trimmed to 30 seconds."
+    },
+    "image_urls": {
+     "type": "array",
+     "default": [],
+     "maxItems": 5,
+     "description": "Optional character references. Leave empty to restyle the source frame.",
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    }
+   },
+   "notes": [
+    "Restyle changes the visual style of a source video while retaining its motion, shot composition, and source audio. Each request produces one video.",
+    "Select a current style from GET /models/higgsfield/genjutsu/restyle/v1.0/presets and send its UUID as preset_id. The example UUID below is illustrative of a published preset; fetch the current catalog before submitting.",
+    "The source must be at least 4 seconds and no larger than 200 MiB. Videos longer than 30 seconds are trimmed to their first 30 seconds, including audio.",
+    "Character references are optional: omit image_urls or send \\[] to restyle the existing source subjects. Supply up to 5 character images to guide their appearance.",
+    "Defaults apply to omitted optional fields. Use \\[] or an empty string where appropriate; null is not accepted.",
+    "Output framing is derived from the source and animation cadence can depend on the selected style. Exact output duration and FPS may differ from the source."
+   ]
+  },
+  {
+   "id": "alibaba/happy-horse/text-to-video",
+   "title": "Happy Horse 1.0 — Text to video",
+   "family": "happy-horse-1_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4"
+     ],
+     "default": "16:9",
+     "description": "Aspect Ratio"
+    }
+   },
+   "notes": [
+    "The prompt must contain text; an empty string is rejected during submission."
+   ]
+  },
+  {
+   "id": "alibaba/happy-horse/v1.1/text-to-video",
+   "title": "HappyHorse 1.1 — Text to video",
+   "family": "happy-horse-1-1_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4"
+     ],
+     "default": "16:9",
+     "description": "Aspect Ratio"
+    }
+   },
+   "notes": [
+    "The prompt must contain text; an empty string is rejected during submission."
+   ]
+  },
+  {
+   "id": "alibaba/wan-3.0-prime/text-to-video",
+   "title": "Wan 3.0 Prime — Text to video",
+   "family": "wan-3-prime_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 30,
+     "description": "2-30 seconds."
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "adaptive"
+     ],
+     "default": "adaptive",
+     "description": "Aspect Ratio"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Sound"
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": false,
+     "description": "Deep Thinking"
+    }
+   },
+   "notes": [
+    "This endpoint generates from text; use the separate image or reference endpoint for media inputs.",
+    "The schema accepts seed=0, but the current implementation only forwards a nonzero seed."
+   ]
+  },
+  {
+   "id": "alibaba/wan-3.0/text-to-video",
+   "title": "Wan 3.0 — Text to video",
+   "family": "wan-3_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 30,
+     "description": "2-30 seconds."
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "1080p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "adaptive"
+     ],
+     "default": "adaptive",
+     "description": "Aspect Ratio"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Sound"
+    },
+    "enable_thinking": {
+     "type": "boolean",
+     "default": false,
+     "description": "Deep Thinking"
+    }
+   },
+   "notes": [
+    "This endpoint generates from text; use the separate image or reference endpoint for media inputs.",
+    "The schema accepts seed=0, but the current implementation only forwards a nonzero seed."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.0/text-to-video",
+   "title": "Seedance 2.0 — Text to video",
+   "family": "seedance-2_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 15
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p",
+      "4k"
+     ],
+     "default": "720p"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "21:9"
+     ],
+     "default": "16:9"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "Provide a nonblank prompt. This endpoint does not use media inputs; use the image-to-video or reference-to-video endpoint instead."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.5/text-to-video",
+   "title": "Seedance 2.5 — Text to video",
+   "family": "seedance-2-5_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 30
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16",
+      "21:9"
+     ],
+     "default": "16:9"
+    },
+    "bitrate_mode": {
+     "type": "string",
+     "enum": [
+      "standard",
+      "high"
+     ],
+     "default": "high"
+    },
+    "output_format": {
+     "type": "string",
+     "enum": [
+      "mp4",
+      "mov"
+     ],
+     "default": "mp4"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "Provide a nonblank prompt. This endpoint does not use media inputs; use the image-to-video or reference-to-video endpoint instead."
+   ]
+  },
+  {
+   "id": "kling-video/v2.5-turbo/pro/text-to-video",
+   "title": "Kling 2.5 Turbo — Pro text to video",
+   "family": "kling-2-5-turbo_pro-text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "negative_prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Negative Prompt"
+    }
+   },
+   "notes": [
+    "duration accepts 5 or 10 seconds; 5 is the default.",
+    "This endpoint does not expose a sound or aspect_ratio field."
+   ]
+  },
+  {
+   "id": "kling-video/v2.6/pro/text-to-video",
+   "title": "Kling 2.6 — Pro text to video",
+   "family": "kling-2-6_pro-text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    }
+   },
+   "notes": [
+    "duration accepts 5 or 10 seconds; 5 is the default.",
+    "Native audio uses sound: on or off and defaults to on."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0-turbo/text-to-video",
+   "title": "Kling 3.0 — Turbo · Text to video",
+   "family": "kling-3_turbo-text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    }
+   },
+   "notes": [
+    "duration accepts integers from 3 to 15 seconds. resolution accepts 720p or 1080p and defaults to 720p.",
+    "This endpoint has no sound, multi_shots, elements, or last-frame field.",
+    "aspect_ratio accepts 16:9, 9:16, or 1:1 and defaults to 16:9.",
+    "Keep prompt within 3,072 characters; longer prompts are truncated."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0/4k/text-to-video",
+   "title": "Kling 3.0 — 4K · Text to video",
+   "family": "kling-3_4k-text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+       }
+      }
+     }
+    }
+   },
+   "notes": [
+    "Always include a non-empty top-level prompt, including when using multi_prompt. Keep it within 2,500 characters; longer prompts are truncated.",
+    "For custom shots, set multi_shots to true and provide 1–6 multi_prompt objects. Each object needs prompt (at most 512 characters) and duration (a positive integer from 1 to 15 seconds).",
+    "Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum. With multi_shots enabled and no custom shots, the top-level duration is retained.",
+    "Native audio uses sound: on or off and defaults to on.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0/pro/text-to-video",
+   "title": "Kling 3.0 — Pro · Text to video",
+   "family": "kling-3_pro-text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+       }
+      }
+     }
+    }
+   },
+   "notes": [
+    "Always include a non-empty top-level prompt, including when using multi_prompt. Keep it within 2,500 characters; longer prompts are truncated.",
+    "For custom shots, set multi_shots to true and provide 1–6 multi_prompt objects. Each object needs prompt (at most 512 characters) and duration (a positive integer from 1 to 15 seconds).",
+    "Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum. With multi_shots enabled and no custom shots, the top-level duration is retained.",
+    "Native audio uses sound: on or off and defaults to on.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "kling-video/v3.0/std/text-to-video",
+   "title": "Kling 3.0 — Standard · Text to video",
+   "family": "kling-3_standard-text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [],
+   "properties": {
+    "sound": {
+     "type": "string",
+     "enum": [
+      "on",
+      "off"
+     ],
+     "default": "on",
+     "description": "Generate sound"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 3,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "elements": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "cfg_scale": {
+     "type": "number",
+     "default": 0.5,
+     "minimum": 0,
+     "maximum": 1,
+     "description": "CFG Scale"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "multi_prompt": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "properties": {
+       "prompt": {
+        "type": "string",
+        "maxLength": 512
+       },
+       "duration": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+       }
+      }
+     }
+    }
+   },
+   "notes": [
+    "Always include a non-empty top-level prompt, including when using multi_prompt. Keep it within 2,500 characters; longer prompts are truncated.",
+    "For custom shots, set multi_shots to true and provide 1–6 multi_prompt objects. Each object needs prompt (at most 512 characters) and duration (a positive integer from 1 to 15 seconds).",
+    "Custom-shot durations are summed for generation and billing; the top-level duration does not override that sum. With multi_shots enabled and no custom shots, the top-level duration is retained.",
+    "Native audio uses sound: on or off and defaults to on.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "lightricks/ltx-2.5/text-to-video/fast",
+   "title": "LTX-2.5 — Text to video fast",
+   "family": "ltx-2-5_text-to-video-fast",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt",
+    "duration"
+   ],
+   "properties": {
+    "fps": {
+     "type": "integer",
+     "enum": [
+      24,
+      25,
+      48,
+      50
+     ],
+     "default": 25,
+     "description": "Frames per second"
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      6,
+      8,
+      10
+     ],
+     "default": 6,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p",
+      "2k",
+      "4k"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Generate audio"
+    },
+    "camera_movement": {
+     "type": "string",
+     "enum": [
+      "dolly_in",
+      "dolly_out",
+      "dolly_left",
+      "dolly_right",
+      "jib_up",
+      "jib_down",
+      "static",
+      "focus_shift"
+     ],
+     "description": "Camera movement"
+    }
+   },
+   "notes": [
+    "duration is marked required in the schema and has default 6; the API applies this top-level default before validation. The example includes it explicitly.",
+    "Fast supports 720p, 1080p, 2k or 4k and 24, 25, 48 or 50 fps."
+   ]
+  },
+  {
+   "id": "lightricks/ltx-2.5/text-to-video/pro",
+   "title": "LTX-2.5 — Text to video pro",
+   "family": "ltx-2-5_text-to-video-pro",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt",
+    "duration"
+   ],
+   "properties": {
+    "fps": {
+     "type": "integer",
+     "enum": [
+      24,
+      25,
+      50
+     ],
+     "default": 25,
+     "description": "Frames per second"
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      6,
+      8,
+      10
+     ],
+     "default": 6,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Generate audio"
+    },
+    "camera_movement": {
+     "type": "string",
+     "enum": [
+      "dolly_in",
+      "dolly_out",
+      "dolly_left",
+      "dolly_right",
+      "jib_up",
+      "jib_down",
+      "static",
+      "focus_shift"
+     ],
+     "description": "Camera movement"
+    }
+   },
+   "notes": [
+    "duration is marked required in the schema and has default 6; the API applies this top-level default before validation. The example includes it explicitly.",
+    "Pro supports 720p or 1080p and 24, 25 or 50 fps. Use the Fast endpoint for 2k, 4k or 48 fps."
+   ]
+  },
+  {
+   "id": "minimax/h3/text-to-video",
+   "title": "MiniMax H3 — Text to video",
+   "family": "minimax-h3_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 5,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "2K"
+     ],
+     "default": "2K",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "adaptive",
+      "21:9",
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16"
+     ],
+     "default": "auto",
+     "description": "Aspect ratio"
+    },
+    "aigc_watermark": {
+     "type": "boolean",
+     "default": false,
+     "description": "AIGC watermark"
+    }
+   },
+   "notes": [
+    "Resolution is fixed to the case-sensitive schema value \"2K\". The prompt must contain non-whitespace text; the current provider serializer uses only its first 7,000 characters.",
+    "For text-only requests, aspect_ratio=\"auto\" or \"adaptive\" resolves to 16:9."
+   ]
+  },
+  {
+   "id": "minimax/hailuo-2.3/standard/text-to-video",
+   "title": "Hailuo 2.3 — Standard text to video",
+   "family": "hailuo-2-3_standard-text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      6,
+      10
+     ],
+     "default": 6,
+     "description": "Duration"
+    },
+    "prompt_optimizer": {
+     "type": "boolean",
+     "default": true,
+     "description": "Prompt optimizer"
+    }
+   },
+   "notes": [
+    "This Standard endpoint uses a fixed 768P output resolution; resolution is not a configurable field in the production schema."
+   ]
+  },
+  {
+   "id": "pixverse/v6/text-to-video",
+   "title": "PixVerse V6 — Text to video",
+   "family": "pixverse-v6_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 2147483647,
+     "description": "Seed"
+    },
+    "prompt": {
+     "type": "string",
+     "maxLength": 5000,
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "number",
+     "default": 5,
+     "minimum": 1,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "360p",
+      "540p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p",
+     "description": "Resolution"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16"
+     ],
+     "default": "16:9",
+     "description": "Aspect ratio"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true,
+     "description": "Generate audio"
+    },
+    "negative_prompt": {
+     "type": "string",
+     "maxLength": 2048,
+     "description": "Negative prompt"
+    }
+   },
+   "notes": [
+    "duration is a number from 1 to 15, so the schema allows fractional values. If negative_prompt is supplied, it must contain 1–2,048 characters."
+   ]
+  },
+  {
+   "id": "wan/v2.6/text-to-video",
+   "title": "Wan 2.6 — Text to video",
+   "family": "wan-2-6_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": -1,
+     "maximum": 10000000
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "enum": [
+      5,
+      10,
+      15
+     ],
+     "default": 5,
+     "description": "Duration"
+    },
+    "audio_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Audio URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "multi_shots": {
+     "type": "boolean",
+     "default": false
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": false
+    }
+   },
+   "notes": [
+    "Setting multi_shots=true also enables prompt_extend, even if prompt_extend was false."
+   ]
+  },
+  {
+   "id": "wan/v2.7/text-to-video",
+   "title": "Wan 2.7 — Text to video",
+   "family": "wan-2-7_text-to-video",
+   "kind": "video",
+   "workflow": "text-to-video",
+   "required": [
+    "prompt"
+   ],
+   "properties": {
+    "seed": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 2147483646
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 2,
+     "maximum": 15,
+     "description": "Duration"
+    },
+    "audio_url": {
+     "type": "string",
+     "format": "uri",
+     "description": "Audio URL"
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "aspect_ratio": {
+     "type": "string",
+     "enum": [
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4"
+     ],
+     "default": "16:9",
+     "description": "Aspect Ratio"
+    },
+    "prompt_extend": {
+     "type": "boolean",
+     "default": false
+    },
+    "negative_prompt": {
+     "type": "string",
+     "default": "",
+     "description": "Negative prompt"
+    }
+   },
+   "notes": [
+    "The prompt must contain text. audio_url can supply driving audio."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.5/video-edit",
+   "title": "Seedance 2.5 — Video edit",
+   "family": "seedance-2-5_video-edit",
+   "kind": "video",
+   "workflow": "video-edit",
+   "required": [
+    "prompt",
+    "video_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "video_url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "audio_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 30,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "bitrate_mode": {
+     "type": "string",
+     "enum": [
+      "standard",
+      "high"
+     ],
+     "default": "high"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "The source video_url counts toward the 10-video limit, so include at most 9 additional video_urls. At most 50 media items are accepted across the source video and all reference arrays.",
+    "Videos and audio may be trimmed or padded during preprocessing to fit their respective 30-second total budgets. Output framing follows the source video.",
+    "Do not send duration: this endpoint derives output duration from the processed source video. The main video is normalized to at least 4 seconds."
+   ]
+  },
+  {
+   "id": "bytedance/seedance-2.5/video-extend",
+   "title": "Seedance 2.5 — Video extend",
+   "family": "seedance-2-5_video-extend",
+   "kind": "video",
+   "workflow": "video-edit",
+   "required": [
+    "prompt",
+    "video_url"
+   ],
+   "properties": {
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "duration": {
+     "type": "integer",
+     "default": 5,
+     "minimum": 4,
+     "maximum": 30
+    },
+    "video_url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "audio_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 30,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "resolution": {
+     "type": "string",
+     "enum": [
+      "480p",
+      "720p",
+      "1080p"
+     ],
+     "default": "720p"
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 10,
+     "items": {
+      "type": "string",
+      "format": "uri"
+     }
+    },
+    "bitrate_mode": {
+     "type": "string",
+     "enum": [
+      "standard",
+      "high"
+     ],
+     "default": "high"
+    },
+    "generate_audio": {
+     "type": "boolean",
+     "default": true
+    }
+   },
+   "notes": [
+    "Use publicly accessible media URLs; asset:// references are rejected for these endpoints.",
+    "The source video_url counts toward the 10-video limit, so include at most 9 additional video_urls. At most 50 media items are accepted across the source video and all reference arrays.",
+    "Videos and audio may be trimmed or padded during preprocessing to fit their respective 30-second total budgets. Output framing follows the source video.",
+    "duration is an integer from 4 to 30 seconds, with default 5."
+   ]
+  },
+  {
+   "id": "kling-video/o3/video-edit",
+   "title": "Kling O3 — Video edit",
+   "family": "kling-o3_video-edit",
+   "kind": "video",
+   "workflow": "video-edit",
+   "required": [
+    "prompt",
+    "video_urls"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro",
+      "4k"
+     ],
+     "default": "pro"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "elements": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 1,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Video URL"
+     }
+    }
+   },
+   "notes": [
+    "Supply exactly one source video from 3 to 15.5 seconds long and no larger than 200 MB. Duration is derived from the video; do not send a separate duration field.",
+    "You may also supply up to four image_urls and up to four elements.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  },
+  {
+   "id": "kling-video/omni/video-edit",
+   "title": "Kling Omni — Video edit",
+   "family": "kling-omni_video-edit",
+   "kind": "video",
+   "workflow": "video-edit",
+   "required": [
+    "prompt",
+    "video_urls"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "std",
+      "pro"
+     ],
+     "default": "pro"
+    },
+    "prompt": {
+     "type": "string",
+     "description": "Write your prompt here"
+    },
+    "elements": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string"
+     }
+    },
+    "image_urls": {
+     "type": "array",
+     "minItems": 0,
+     "maxItems": 4,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Image URL"
+     }
+    },
+    "video_urls": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 1,
+     "items": {
+      "type": "string",
+      "format": "uri",
+      "description": "Video URL"
+     }
+    }
+   },
+   "notes": [
+    "Supply exactly one source video from 3 to 10 seconds long and no larger than 200 MB. Duration is derived from the video; do not send a separate duration field.",
+    "You may also supply up to four image_urls and up to four elements.",
+    "Keep the top-level prompt within 2,500 characters; longer prompts are truncated.",
+    "elements contains Kling element IDs as decimal strings. Each ID must belong to the account making the request; arbitrary provider IDs are rejected."
+   ]
+  }
+ ]
+}
