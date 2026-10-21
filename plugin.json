@@ -6,6 +6,7 @@
   "description": "Higgsfield AI API — 83 image and video models (Soul, Seedance, Kling, Wan, Hailuo, PixVerse, LTX, Genjutsu, Recraft, Ideogram…): text/image/reference to video, picture generation and editing, video edit/extend, motion transfer, restyle, object swap and Soul ID characters. Agent tools plus workflow nodes.",
   "min_app_version": "1.0.0",
   "default_enabled": false,
+  "data_sharing": false,
   "secret_keys": [
     "higgsfield_api_key"
   ],
